@@ -1667,8 +1667,8 @@
 
         // FONCTION DE NAVIGATION VERS SOUS-FONCTIONNALITÉ MODIFIÉE
         function goToSubFeature(mainFeatureId, subFeatureId) {
-            // Construction de l'URL: /mainfeature/subfeature.html
-            const url = `/${mainFeatureId}/${subFeatureId}.html`;
+            // Construction de l'URL: mainfeature/subfeature.html
+            const url = `./${mainFeatureId}/${subFeatureId}.html`;
             window.location.href = url;
         }
 
@@ -1678,7 +1678,7 @@
                 window.location.href = "index.html"; // ou la page d'accueil principale
             } else {
                 // Redirige vers la page correspondante
-                window.location.href = `/${featureId}/index.html`;
+                window.location.href = `./${featureId}/index.html`;
             }
         }
 
@@ -1735,8 +1735,8 @@
                 const moreBtn = document.createElement("a");
                 moreBtn.className = "feature-more-btn";
                 moreBtn.textContent = "En savoir plus";
-                // Redirige vers /mainfeature/subfeature.html
-                moreBtn.href = `/${activeFeature}/${feature.id}.html`;
+                // Redirige vers mainfeature/subfeature.html
+                moreBtn.href = `./${activeFeature}/${feature.id}.html`;
                 moreBtn.setAttribute("aria-label", `En savoir plus sur ${feature.title}`);
 
                 // Ajoute le bouton après le contenu

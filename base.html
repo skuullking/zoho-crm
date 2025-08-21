@@ -385,6 +385,8 @@
             // Génération de la sidebar
             function renderSidebar() {
                 const sidebarNav = document.getElementById("sidebarNav");
+                if (!sidebarNav) return; // Protection contre les éléments manquants
+                
                 sidebarNav.innerHTML = "";
                 subFeatures.forEach((sf) => {
                     const btn = document.createElement("button");
@@ -394,15 +396,7 @@
                     sidebarNav.appendChild(btn);
                 });
             }
-            // Navigation (adaptable selon votre intégration SPA/routing)
-            function goToOverview(featureId) {
-                if (featureId === "automatisation") {
-                    window.location.href = "index.html"; // ou la page d'accueil principale
-                } else {
-                    // Redirige vers la page correspondante
-                    alert(`Redirection vers la fonctionnalité "${featureId}"`);
-                }
-            }
+            
             function goToSubFeature(subFeatureId) {
                 if (subFeatureId === "gestion-leads") {
                     window.scrollTo({top: 0, behavior: "smooth"});

@@ -413,37 +413,50 @@
             // Génération de la nav principale
             function renderNav() {
                 const navContainer = document.getElementById("navContainer");
+                if (!navContainer) return; // Protection contre les éléments manquants
+                
                 navContainer.innerHTML = "";
+
                 mainFeatures.forEach((feature) => {
                     const navItem = document.createElement("div");
                     navItem.className = "nav-item";
+
                     const button = document.createElement("button");
-                    button.className = "nav-button" + (feature.id === "automatisation" ? " active" : "");
+                    button.className = "nav-button" + (feature.id === currentMainFeatureId ? " active" : "");
                     button.textContent = feature.title;
-                    // Redirige vers la page d'overview de la feature
-                    button.onclick = () => (window.location.href = `/index.html`);
+
+                    // Navigation vers la page d'accueil avec le paramètre feature
+                    button.onclick = () => goToOverview(feature.id);
+
                     navItem.appendChild(button);
 
                     // Dropdown pour les sous-fonctionnalités de "automatisation"
                     if (feature.id === "automatisation") {
                         const dropdown = document.createElement("div");
                         dropdown.className = "dropdown-menu";
+
                         const dropdownTitle = document.createElement("h3");
                         dropdownTitle.className = "dropdown-title";
                         dropdownTitle.textContent = feature.title;
                         dropdown.appendChild(dropdownTitle);
+
                         subFeatures.forEach((sf) => {
                             const dropdownItem = document.createElement("div");
                             dropdownItem.className = "dropdown-item";
                             dropdownItem.textContent = sf.title;
-                            // Redirige vers la page de la sous-fonctionnalité
-                            dropdownItem.onclick = () => (window.location.href = `${sf.id}.html`);
+
+                            // Navigation vers la sous-fonctionnalité
+                            dropdownItem.onclick = () => goToSubFeature(sf.id);
+
                             dropdown.appendChild(dropdownItem);
                         });
+
                         navItem.appendChild(dropdown);
+
                         navItem.onmouseenter = () => dropdown.classList.add("show");
                         navItem.onmouseleave = () => dropdown.classList.remove("show");
                     }
+
                     navContainer.appendChild(navItem);
                 });
             } // Variable globale pour suivre la sous-fonctionnalité active
@@ -452,11 +465,12 @@
             // Génération de la sidebar
             function renderSidebar() {
                 const sidebarNav = document.getElementById("sidebarNav");
-                if (!sidebarNav) return; // Sécurité si l'élément n'existe pas
+                if (!sidebarNav) return; // Protection contre les éléments manquants
+                
                 sidebarNav.innerHTML = "";
                 subFeatures.forEach((sf) => {
                     const btn = document.createElement("button");
-                    btn.className = "sidebar-item" + (sf.id === currentSubFeatureId ? " active" : "");
+                    btn.className = "sidebar-item" + (sf.id === "assistants" ? " active" : "");
                     btn.textContent = sf.title;
                     btn.onclick = () => goToSubFeature(sf.id);
                     sidebarNav.appendChild(btn);
@@ -465,31 +479,15 @@
 
             // Navigation (adaptable selon votre intégration SPA/routing)
             function goToOverview(featureId) {
-                currentMainFeatureId = featureId;
-                renderNav && typeof renderNav === "function" && renderNav();
-                // Redirection réelle selon l'id de la fonctionnalité
                 if (featureId === "automatisation") {
-                    window.location.href = "index.html"; // ou la page d'accueil principale
-                } else {
+                    window.location.href = "../index.html"; // Retour à l'accueil
+                 else {
                     // Exemple de redirection vers une page spécifique de la fonctionnalité
                     window.location.href = `${featureId}.html`;
                 }
             }
 
             function goToSubFeature(subFeatureId) {
-                currentSubFeatureId = subFeatureId;
-                renderSidebar();
-                // Redirection réelle selon l'id de la sous-fonctionnalité
-                if (subFeatureId === "gestion-leads") {
+                if (subFeatureId === "assistants") {
+                    // Déjà sur cette page, scroll vers le haut
                     window.scrollTo({top: 0, behavior: "smooth"});
-                } else {
-                    // Exemple de redirection vers une page détaillée de la sous-fonctionnalité
-                    window.location.href = `${subFeatureId}.html`;
-                }
-            }
-            // Initialisation
-            renderNav();
-            renderSidebar();
-        </script>
-    </body>
-</html>

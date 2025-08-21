@@ -408,6 +408,8 @@
             ];
             function renderNav() {
                 const navContainer = document.getElementById("navContainer");
+                if (!navContainer) return; // Protection contre les éléments manquants
+                
                 navContainer.innerHTML = "";
 
                 mainFeatures.forEach((feature) => {
@@ -415,13 +417,11 @@
                     navItem.className = "nav-item";
 
                     const button = document.createElement("button");
-                    button.className = "nav-button" + (feature.id === "automatisation" ? " active" : "");
+                    button.className = "nav-button" + (feature.id === currentMainFeatureId ? " active" : "");
                     button.textContent = feature.title;
 
-                    // MODIFIÉ : Redirige vers index.html avec le paramètre feature
-                    button.onclick = () => {
-                        window.location.href = `/index.html?feature=${feature.id}`;
-                    };
+                    // Navigation vers la page d'accueil avec le paramètre feature
+                    button.onclick = () => goToOverview(feature.id);
 
                     navItem.appendChild(button);
 
@@ -440,10 +440,8 @@
                             dropdownItem.className = "dropdown-item";
                             dropdownItem.textContent = sf.title;
 
-                            // MODIFIÉ : Redirige vers index.html avec feature et section
-                            dropdownItem.onclick = () => {
-                                window.location.href = `/index.html?feature=${feature.id}&section=${sf.id}`;
-                            };
+                            // Navigation vers la sous-fonctionnalité
+                            dropdownItem.onclick = () => goToSubFeature(sf.id);
 
                             dropdown.appendChild(dropdownItem);
                         });
@@ -470,49 +468,18 @@
                 };
             }
 
-            function init() {
-                const {feature, section} = parseHash();
-
-                if (featuresData[feature]) {
-                    activeFeature = feature;
-                }
-
-                renderNavigation();
-                renderContent();
-                setupIntersectionObserver();
-
-                if (section) {
-                    setTimeout(() => {
-                        scrollToSection(section);
-                    }, 500);
-                } else if (featuresData[activeFeature] && featuresData[activeFeature].subFeatures.length > 0) {
-                    setTimeout(() => {
-                        scrollToSection(featuresData[activeFeature].subFeatures[0].id);
-                    }, 100);
-                }
-            }
-
-            // Écouter les changements de hash
-            window.addEventListener("hashchange", function () {
-                const {feature, section} = parseHash();
-
-                if (feature !== activeFeature) {
-                    setActiveFeature(feature);
-                }
-
-                if (section) {
-                    setTimeout(() => {
-                        scrollToSection(section);
-                    }, 100);
-                }
-            });
+            // Variables d'état
+            let activeFeature = "marketing";
+            let currentMainFeatureId = "marketing";
             // Génération de la sidebar
             function renderSidebar() {
                 const sidebarNav = document.getElementById("sidebarNav");
+                if (!sidebarNav) return; // Protection contre les éléments manquants
+                
                 sidebarNav.innerHTML = "";
                 subFeatures.forEach((sf) => {
                     const btn = document.createElement("button");
-                    btn.className = "sidebar-item" + (sf.id === "gestion-leads" ? " active" : "");
+                    btn.className = "sidebar-item" + (sf.id === "automatisation-campagnes" ? " active" : "");
                     btn.textContent = sf.title;
                     btn.onclick = () => goToSubFeature(sf.id);
                     sidebarNav.appendChild(btn);
@@ -521,23 +488,13 @@
             // Navigation (adaptable selon votre intégration SPA/routing)
             function goToOverview(featureId) {
                 if (featureId === "automatisation") {
-                    window.location.href = "index.html"; // ou la page d'accueil principale
-                } else {
+                    window.location.href = "../index.html"; // Retour à l'accueil
+                 else {
                     // Redirige vers la page correspondante
                     alert(`Redirection vers la fonctionnalité "${featureId}"`);
                 }
             }
             function goToSubFeature(subFeatureId) {
-                if (subFeatureId === "gestion-leads") {
+                if (subFeatureId === "automatisation-campagnes") {
+                    // Déjà sur cette page, scroll vers le haut
                     window.scrollTo({top: 0, behavior: "smooth"});
-                } else {
-                    // Redirige vers la page détaillée correspondante ou affiche une alerte
-                    alert(`Page détaillée pour "${subFeatureId}" non implémentée.`);
-                }
-            }
-            // Initialisation
-            renderNav();
-            renderSidebar();
-        </script>
-    </body>
-</html>
