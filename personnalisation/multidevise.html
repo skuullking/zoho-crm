@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:400,500,700&display=swap" />
+        <style>
+            /* Copie les styles principaux de la page d'origine pour la cohérence */
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                line-height: 1.6;
+                color: #333;
+                background-color: #f5f5f5;
+                margin: 0;
+            }
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+            .header {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 80px;
+                background: white;
+                border-bottom: 1px solid #e5e5e5;
+                z-index: 50;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .header-content {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                height: 100%;
+                padding: 0 24px;
+            }
+            .logo img {
+                height: 40px;
+            }
+            .nav-container {
+                display: flex;
+                flex: 1;
+                margin-left: 48px;
+            }
+            .nav-item {
+                position: relative;
+                flex: 1;
+            }
+            .nav-button {
+                background: none;
+                border: none;
+                font-size: 14px;
+                font-weight: 600;
+                padding: 12px 8px;
+                border-radius: 8px;
+                width: 100%;
+                height: 60px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                color: #374151;
+                word-break: keep-all;
+            }
+            .nav-button.active,
+            .nav-button:hover {
+                color: #4f46e5;
+                background-color: #eef2ff;
+            }
+            .dropdown-menu {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                min-width: 280px;
+                background: white;
+                border: 1px solid #e5e5e5;
+                border-radius: 12px;
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+                z-index: 60;
+                display: none;
+                padding: 20px;
+                max-height: 400px;
+                overflow-y: auto;
+            }
+            .dropdown-menu.show {
+                display: block;
+            }
+            .dropdown-title {
+                font-weight: bold;
+                color: #1f2937;
+                margin-bottom: 16px;
+            }
+            .dropdown-item {
+                padding: 8px 12px;
+                font-size: 14px;
+                color: #6b7280;
+                cursor: pointer;
+                border-radius: 8px;
+                transition: all 0.3s ease;
+                margin-bottom: 8px;
+            }
+            .dropdown-item:hover {
+                background-color: #f9fafb;
+                color: #4f46e5;
+            }
+            /* Sidebar */
+            .sidebar {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                bottom: 0;
+                background: white;
+                border-right: 1px solid #e5e5e5;
+                box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+                z-index: 40;
+                transition: all 0.3s ease;
+                overflow-y: auto;
+                width: 180px;
+            }
+            .sidebar-header {
+                background: #4f46e5;
+                color: white;
+                padding: 16px;
+                padding-top: 56px;
+            }
+            .sidebar-title {
+                font-size: 18px;
+                font-weight: bold;
+            }
+            .sidebar-subtitle {
+                font-size: 12px;
+                color: #c7d2fe;
+                margin-top: 4px;
+            }
+            .sidebar-nav {
+                padding: 0;
+            }
+            .sidebar-item {
+                width: 100%;
+                text-align: left;
+                padding: 12px 16px;
+                border-bottom: 1px solid #f3f4f6;
+                background: none;
+                border: none;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                color: #374151;
+                font-size: 14px;
+            }
+            .sidebar-item.active,
+            .sidebar-item:hover {
+                background-color: #eef2ff;
+                color: #4f46e5;
+                border-left: 4px solid #4f46e5;
+                font-weight: 600;
+            }
+            .main-content {
+                margin-left: 180px;
+                margin-top: 80px;
+                background-color: #fafafa;
+                min-height: 100vh;
+                padding-bottom: 64px;
+            }
+            /* Breadcrumb */
+            .breadcrumb {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                height: 50px;
+                background: #f8fafc;
+                border-bottom: 1px solid #e5e5e5;
+                z-index: 45;
+                display: flex;
+                align-items: center;
+                padding: 0 24px;
+            }
+            .breadcrumb-item {
+                color: #6b7280;
+                font-size: 14px;
+            }
+            .breadcrumb-separator {
+                margin: 0 8px;
+                color: #9ca3af;
+            }
+            .breadcrumb-link {
+                color: #4f46e5;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            .breadcrumb-link:hover {
+                text-decoration: underline;
+            }
+            /* Detailed content */
+            .detailed-hero {
+                text-align: center;
+                margin-bottom: 48px;
+            }
+            .detailed-title {
+                font-size: 42px;
+                font-weight: bold;
+                color: #1f2937;
+                margin-bottom: 18px;
+            }
+            .detailed-subtitle {
+                font-size: 22px;
+                color: #6b7280;
+                margin-bottom: 28px;
+            }
+            .detailed-content {
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+            .detailed-section {
+                margin-bottom: 42px;
+            }
+            .detailed-section h3 {
+                font-size: 22px;
+                font-weight: 700;
+                color: #1f2937;
+                margin-bottom: 14px;
+                border-bottom: 2px solid #4f46e5;
+                padding-bottom: 8px;
+            }
+            .detailed-section p {
+                font-size: 18px;
+                line-height: 1.8;
+                color: #374151;
+                margin-bottom: 16px;
+            }
+            .detailed-features-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 24px;
+                margin-top: 18px;
+            }
+            .detailed-feature-card {
+                background: #f8fafc;
+                padding: 20px;
+                border-radius: 12px;
+                border-left: 4px solid #4f46e5;
+            }
+            .detailed-feature-card h4 {
+                font-size: 18px;
+                font-weight: 600;
+                color: #1f2937;
+                margin-bottom: 10px;
+            }
+            .detailed-feature-card p {
+                font-size: 16px;
+                color: #6b7280;
+                margin-bottom: 0;
+            }
+            .detailed-media {
+                text-align: center;
+                margin: 42px 0;
+            }
+            .detailed-image,
+            .detailed-video {
+                max-width: 100%;
+                height: auto;
+                border-radius: 12px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            }
+            @media (max-width: 768px) {
+                .nav-container {
+                    display: none;
+                }
+                .sidebar {
+                    width: 50px;
+                }
+                .main-content {
+                    margin-left: 50px;
+                }
+                .detailed-title {
+                    font-size: 28px;
+                }
+                .detailed-section h3 {
+                    font-size: 18px;
+                }
+                .detailed-features-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="/files/logo/yeddir_svg.svg" alt="Logo Yeddir" />
+                </div>
+                <nav class="nav-container" id="navContainer">
+                    <!-- La navigation principale sera générée par JS -->
+                </nav>
+            </div>
+        </header>
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb" id="breadcrumb">
+            <span class="breadcrumb-item"
+                ><a class="breadcrumb-link" href="#" onclick="goToOverview('personnalisation')"
+                    >Fonctionnalités</a
+                ></span
+            >
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-item"
+                ><a class="breadcrumb-link" href="#" onclick="goToOverview('personnalisation')"
+                    >Personnalisation</a
+                ></span
+            >
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-item">Multidevise</span>
+        </nav>
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title" id="sidebarTitle">Personnalisation</div>
+                <div class="sidebar-subtitle">Navigation</div>
+            </div>
+            <nav class="sidebar-nav" id="sidebarNav"></nav>
+        </aside>
+        <main class="main-content" id="mainContent">
+            <div class="container">
+                <div class="detailed-hero">
+                    <h1 class="detailed-title">Multidevise</h1>
+                    <p class="detailed-subtitle">Gestion native des devises multiples</p>
+                </div>
+                <div class="detailed-content">
+                    <div class="detailed-section">
+                        <h3>Vue d'ensemble</h3>
+                        <p>
+                            Gérez vos activités commerciales internationales avec un support complet des devises
+                            multiples et une gestion automatisée des taux de change.
+                        </p>
+                    </div>
+                    <div class="detailed-media">
+                        <img
+                            src="/image_video/personalisation/multi-device.svg"
+                            alt="Multidevise"
+                            class="detailed-image"
+                        />
+                    </div>
+                    <div class="detailed-section">
+                        <h3>Fonctionnalités clés</h3>
+                        <div class="detailed-features-grid">
+                            <div class="detailed-feature-card">
+                                <h4>Support multidevise</h4>
+                                <p>Gestion native de multiples devises avec conversion automatique et en temps réel.</p>
+                            </div>
+                            <div class="detailed-feature-card">
+                                <h4>Taux historiques</h4>
+                                <p>Conservation des taux de change historiques pour analyses rétrospectives.</p>
+                            </div>
+                            <div class="detailed-feature-card">
+                                <h4>Rapports unifiés</h4>
+                                <p>
+                                    Génération de rapports dans n'importe quelle devise avec conversions transparentes.
+                                </p>
+                            </div>
+                            <div class="detailed-feature-card">
+                                <h4>Gestion des risques</h4>
+                                <p>Outils de protection contre les fluctuations avec alertes automatiques.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detailed-section">
+                        <h3>Bénéfices</h3>
+                        <div class="detailed-features-grid">
+                            <div class="detailed-feature-card"><p>✓ Commerce international simplifié</p></div>
+                            <div class="detailed-feature-card"><p>✓ Risques de change maîtrisés</p></div>
+                            <div class="detailed-feature-card"><p>✓ Reporting global unifié</p></div>
+                            <div class="detailed-feature-card"><p>✓ Conformité comptable internationale</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script>
+            // NAVIGATION ET SIDEBAR - même logique que page principale
+            // Structure simplifiée pour cette vue
+            const mainFeatures = [
+                {id: "automatisation", title: "Automatisation de la force de vente"},
+                {id: "processus", title: "Processus de vente"},
+                {id: "omnicanal", title: "Omnicanal"},
+                {id: "analyses", title: "Analyse des ventes"},
+                {id: "aidevente", title: "Aide à la vente"},
+                {id: "performances", title: "Performances de vente"},
+                {id: "ZIA", title: "ZIA"},
+                {id: "personnalisation", title: "Personnalisation"},
+                {id: "marketing", title: "Automatisation du marketing"},
+                {id: "collaboration", title: "Collaboration en équipe"},
+                {id: "mobile", title: "Applications mobiles"},
+                {id: "plateforme", title: "Outils de développeur"},
+            ];
+            const subFeatures = [
+                {id: "dispositions-multi-pages", title: "Dispositions multi-pages"},
+                {id: "composants-personnalises", title: "Composants personnalisés"},
+                {id: "champs-conditionnels", title: "Champs conditionnels"},
+                {id: "regles-validation-perso", title: "Règles de validation"},
+                {id: "vues-filtres", title: "Vues et filtres"},
+                {id: "suivi-historique-liste", title: "Suivi de l'historique de liste de sélection"},
+                {id: "sous-formulaires", title: "Sous-formulaires"},
+                {id: "association", title: "Association"},
+                {id: "copier-personnalisation", title: "Copier la personnalisation"},
+                {id: "champs-utilisateur", title: "Champs Utilisateur"},
+                {id: "traductions", title: "Traductions"},
+                {id: "multidevise", title: "Multidevise"},
+                {id: "fonction-personnalisee", title: "Fonction personnalisée"},
+            ];
+            function renderNav() {
+                const navContainer = document.getElementById("navContainer");
+                navContainer.innerHTML = "";
+
+                mainFeatures.forEach((feature) => {
+                    const navItem = document.createElement("div");
+                    navItem.className = "nav-item";
+
+                    const button = document.createElement("button");
+                    button.className = "nav-button" + (feature.id === "automatisation" ? " active" : "");
+                    button.textContent = feature.title;
+
+                    // MODIFIÉ : Redirige vers index.html avec le paramètre feature
+                    button.onclick = () => {
+                        window.location.href = `/index.html?feature=${feature.id}`;
+                    };
+
+                    navItem.appendChild(button);
+
+                    // Dropdown pour les sous-fonctionnalités de "automatisation"
+                    if (feature.id === "automatisation") {
+                        const dropdown = document.createElement("div");
+                        dropdown.className = "dropdown-menu";
+
+                        const dropdownTitle = document.createElement("h3");
+                        dropdownTitle.className = "dropdown-title";
+                        dropdownTitle.textContent = feature.title;
+                        dropdown.appendChild(dropdownTitle);
+
+                        subFeatures.forEach((sf) => {
+                            const dropdownItem = document.createElement("div");
+                            dropdownItem.className = "dropdown-item";
+                            dropdownItem.textContent = sf.title;
+
+                            // MODIFIÉ : Redirige vers index.html avec feature et section
+                            dropdownItem.onclick = () => {
+                                window.location.href = `/index.html?feature=${feature.id}&section=${sf.id}`;
+                            };
+
+                            dropdown.appendChild(dropdownItem);
+                        });
+
+                        navItem.appendChild(dropdown);
+
+                        navItem.onmouseenter = () => dropdown.classList.add("show");
+                        navItem.onmouseleave = () => dropdown.classList.remove("show");
+                    }
+
+                    navContainer.appendChild(navItem);
+                });
+            }
+            // Dans fonctionnalites.html - Gestion du hash
+            function parseHash() {
+                const hash = window.location.hash.substring(1); // Retire le #
+
+                if (!hash) return {feature: "automatisation", section: null};
+
+                const parts = hash.split("-");
+                return {
+                    feature: parts[0] || "automatisation",
+                    section: parts[1] || null,
+                };
+            }
+
+            function init() {
+                const {feature, section} = parseHash();
+
+                if (featuresData[feature]) {
+                    activeFeature = feature;
+                }
+
+                renderNavigation();
+                renderContent();
+                setupIntersectionObserver();
+
+                if (section) {
+                    setTimeout(() => {
+                        scrollToSection(section);
+                    }, 500);
+                } else if (featuresData[activeFeature] && featuresData[activeFeature].subFeatures.length > 0) {
+                    setTimeout(() => {
+                        scrollToSection(featuresData[activeFeature].subFeatures[0].id);
+                    }, 100);
+                }
+            }
+
+            // Écouter les changements de hash
+            window.addEventListener("hashchange", function () {
+                const {feature, section} = parseHash();
+
+                if (feature !== activeFeature) {
+                    setActiveFeature(feature);
+                }
+
+                if (section) {
+                    setTimeout(() => {
+                        scrollToSection(section);
+                    }, 100);
+                }
+            });
+            // Génération de la sidebar
+            function renderSidebar() {
+                const sidebarNav = document.getElementById("sidebarNav");
+                sidebarNav.innerHTML = "";
+                subFeatures.forEach((sf) => {
+                    const btn = document.createElement("button");
+                    btn.className = "sidebar-item" + (sf.id === "gestion-leads" ? " active" : "");
+                    btn.textContent = sf.title;
+                    btn.onclick = () => goToSubFeature(sf.id);
+                    sidebarNav.appendChild(btn);
+                });
+            }
+            // Navigation (adaptable selon votre intégration SPA/routing)
+            function goToOverview(featureId) {
+                if (featureId === "automatisation") {
+                    window.location.href = "index.html"; // ou la page d'accueil principale
+                } else {
+                    // Redirige vers la page correspondante
+                    alert(`Redirection vers la fonctionnalité "${featureId}"`);
+                }
+            }
+            function goToSubFeature(subFeatureId) {
+                if (subFeatureId === "gestion-leads") {
+                    window.scrollTo({top: 0, behavior: "smooth"});
+                } else {
+                    // Redirige vers la page détaillée correspondante ou affiche une alerte
+                    alert(`Page détaillée pour "${subFeatureId}" non implémentée.`);
+                }
+            }
+            // Initialisation
+            renderNav();
+            renderSidebar();
+        </script>
+    </body>
+</html>
