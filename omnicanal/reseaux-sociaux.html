@@ -288,6 +288,37 @@
                     grid-template-columns: 1fr;
                 }
             }
+            @media (max-width: 480px) {
+                .header-content {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+                .logo img {
+                    height: 32px;
+                }
+                .nav-button {
+                    font-size: 12px;
+                    padding: 10px 6px;
+                }
+                .sidebar {
+                    width: 40px;
+                }
+                .main-content {
+                    margin-left: 40px;
+                }
+                .detailed-title {
+                    font-size: 24px;
+                }
+                .detailed-section h3 {
+                    font-size: 16px;
+                }
+                .detailed-feature-card h4 {
+                    font-size: 16px;
+                }
+                .detailed-feature-card p {
+                    font-size: 14px;
+                }
+            }
         </style>
     </head>
     <body>
@@ -394,16 +425,16 @@
                 {id: "plateforme", title: "Outils de développeur"},
             ];
             const subFeatures = [
+                {id: "conferences-web", title: "Conférences web"},
+                {id: "contexte-communication", title: "Contexte communication"},
                 {id: "email", title: "Email"},
-                {id: "telephonie", title: "Téléphonie"},
+                {id: "formulaires-web", title: "Formulaires web"},
+                {id: "notifications-temps-reel", title: "Notifications temps réel"},
+                {id: "portails-libre-service", title: "Portails libre service"},
                 {id: "reseaux-sociaux", title: "Réseaux sociaux"},
                 {id: "sms", title: "SMS"},
-                {id: "tchat-direct", title: "Tchat en direct"},
-                {id: "formulaires-web", title: "Formulaires Web"},
-                {id: "portails-libre-service", title: "Portails en libre-service"},
-                {id: "conferences-web", title: "Conférences Web"},
-                {id: "contexte-communication", title: "Contexte de communication"},
-                {id: "notifications-temps-reel", title: "Notifications en temps réel"},
+                {id: "tchat-direct", title: "Tchat direct"},
+                {id: "telephonie", title: "Téléphonie"},
             ];
             function renderNav() {
                 const navContainer = document.getElementById("navContainer");
@@ -511,9 +542,9 @@
                 sidebarNav.innerHTML = "";
                 subFeatures.forEach((sf) => {
                     const btn = document.createElement("button");
-                    btn.className = "sidebar-item" + (sf.id === "gestion-leads" ? " active" : "");
+                    btn.className = "sidebar-item" + (sf.id === "reseaux-sociaux" ? " active" : "");
                     btn.textContent = sf.title;
-                    btn.onclick = () => goToSubFeature(sf.id);
+                    btn.onclick = () => (window.location.href = `${sf.id}.html`);
                     sidebarNav.appendChild(btn);
                 });
             }

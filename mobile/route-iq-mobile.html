@@ -288,6 +288,37 @@
                     grid-template-columns: 1fr;
                 }
             }
+            @media (max-width: 480px) {
+                .header-content {
+                    flex-direction: column;
+                    align-items: flex-start;
+                }
+                .logo img {
+                    height: 32px;
+                }
+                .nav-button {
+                    font-size: 12px;
+                    padding: 10px 6px;
+                }
+                .sidebar {
+                    width: 40px;
+                }
+                .main-content {
+                    margin-left: 40px;
+                }
+                .detailed-title {
+                    font-size: 24px;
+                }
+                .detailed-section h3 {
+                    font-size: 16px;
+                }
+                .detailed-feature-card h4 {
+                    font-size: 16px;
+                }
+                .detailed-feature-card p {
+                    font-size: 14px;
+                }
+            }
         </style>
     </head>
     <body>
@@ -397,10 +428,10 @@
                 {id: "plateforme", title: "Outils de développeur"},
             ];
             const subFeatures = [
-                {id: "crm-mobile", title: "CRM mobile"},
                 {id: "analytique-mobile", title: "Analytique mobile"},
-                {id: "route-iq-mobile", title: "Route IQ Mobile"},
-                {id: "lecteur-carte-mobile", title: "Lecteur de carte mobile"},
+                {id: "crm-mobile", title: "CRM mobile"},
+                {id: "lecteur-carte-mobile", title: "Lecteur carte mobile"},
+                {id: "route-iq-mobile", title: "Route IQ mobile"},
             ];
             function renderNav() {
                 const navContainer = document.getElementById("navContainer");
@@ -508,9 +539,9 @@
                 sidebarNav.innerHTML = "";
                 subFeatures.forEach((sf) => {
                     const btn = document.createElement("button");
-                    btn.className = "sidebar-item" + (sf.id === "gestion-leads" ? " active" : "");
+                    btn.className = "sidebar-item" + (sf.id === "route-iq-mobile" ? " active" : "");
                     btn.textContent = sf.title;
-                    btn.onclick = () => goToSubFeature(sf.id);
+                    btn.onclick = () => (window.location.href = `${sf.id}.html`);
                     sidebarNav.appendChild(btn);
                 });
             }
