@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+        <title>Finance | Aide à la vente</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:400,500,700&display=swap" />
         <style>
             /* Base */
@@ -370,9 +370,7 @@
                 <div class="logo">
                     <img src="/files/logo/yeddir_svg.svg" alt="Logo Yeddir" />
                 </div>
-                <nav class="nav-container" id="navContainer">
-                    <!-- La navigation principale sera générée par JS -->
-                </nav>
+                <nav class="nav-container" id="navContainer"></nav>
             </div>
         </header>
         <!-- Breadcrumb -->
@@ -387,7 +385,6 @@
             <span class="breadcrumb-separator">›</span>
             <span class="breadcrumb-item">Finance</span>
         </nav>
-
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="sidebar-title" id="sidebarTitle">Aide à la vente</div>
@@ -395,7 +392,6 @@
             </div>
             <nav class="sidebar-nav" id="sidebarNav"></nav>
         </aside>
-
         <main class="main-content" id="mainContent">
             <div class="container">
                 <div class="detailed-hero">
@@ -562,7 +558,6 @@
             // Génération de la sidebar
             function renderSidebar() {
                 const sidebarNav = document.getElementById("sidebarNav");
-                if (!sidebarNav) return;
                 sidebarNav.innerHTML = "";
                 subFeatures.forEach((sf) => {
                     const btn = document.createElement("button");
@@ -576,6 +571,12 @@
             function goToOverview(featureId) {
                 window.location.href = `/${featureId}.html`;
             }
+            function goToSubFeature(subFeatureId) {
+                window.location.href = `${subFeatureId}.html`;
+            }
+            renderNav();
+            renderSidebar();
+
             function goToSubFeature(subFeatureId) {
                 window.location.href = `${subFeatureId}.html`;
             }

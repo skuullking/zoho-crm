@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+        <title>Bibliothèque de Documents - Aide Vente</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:400,500,700&display=swap" />
         <style>
             /* Base */
@@ -370,9 +370,7 @@
                 <div class="logo">
                     <img src="/files/logo/yeddir_svg.svg" alt="Logo Yeddir" />
                 </div>
-                <nav class="nav-container" id="navContainer">
-                    <!-- La navigation principale sera générée par JS -->
-                </nav>
+                <nav class="nav-container" id="navContainer"></nav>
             </div>
         </header>
         <!-- Breadcrumb -->
@@ -385,7 +383,7 @@
                 ><a class="breadcrumb-link" href="#" onclick="goToOverview('aidevente')">Aide à la vente</a></span
             >
             <span class="breadcrumb-separator">›</span>
-            <span class="breadcrumb-item">Google Workspace et Office 365</span>
+            <span class="breadcrumb-item">Google & Office</span>
         </nav>
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
@@ -396,59 +394,7 @@
         </aside>
         <main class="main-content" id="mainContent">
             <div class="container">
-                <div class="detailed-hero">
-                    <h1 class="detailed-title">Google Workspace et Office 365</h1>
-                    <p class="detailed-subtitle">Synchronisation bidirectionnelle complète</p>
-                </div>
-                <div class="detailed-content">
-                    <div class="detailed-section">
-                        <h3>Vue d'ensemble</h3>
-                        <p>
-                            Travaillez dans un écosystème unifié avec une intégration native de Google Workspace et
-                            Office 365 pour une productivité maximale.
-                        </p>
-                    </div>
-                    <div class="detailed-media">
-                        <img
-                            src="/image_video/google-office.svg"
-                            alt="Google Workspace et Office 365"
-                            class="detailed-image"
-                        />
-                    </div>
-                    <div class="detailed-section">
-                        <h3>Fonctionnalités clés</h3>
-                        <div class="detailed-features-grid">
-                            <div class="detailed-feature-card">
-                                <h4>Synchronisation complète</h4>
-                                <p>Échange bidirectionnel de données entre CRM, emails, calendriers et documents.</p>
-                            </div>
-                            <div class="detailed-feature-card">
-                                <h4>Collaboration temps réel</h4>
-                                <p>Coédition de documents avec suivi automatique des versions et commentaires.</p>
-                            </div>
-                            <div class="detailed-feature-card">
-                                <h4>Authentification unique</h4>
-                                <p>
-                                    SSO centralisé pour un accès fluide à tous les outils sans ressaisir les
-                                    identifiants.
-                                </p>
-                            </div>
-                            <div class="detailed-feature-card">
-                                <h4>Workflows intégrés</h4>
-                                <p>Automatisation des processus entre le CRM et les suites bureautiques.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detailed-section">
-                        <h3>Bénéfices</h3>
-                        <div class="detailed-features-grid">
-                            <div class="detailed-feature-card"><p>✓ Écosystème unifié</p></div>
-                            <div class="detailed-feature-card"><p>✓ Productivité maximisée</p></div>
-                            <div class="detailed-feature-card"><p>✓ Collaboration fluide</p></div>
-                            <div class="detailed-feature-card"><p>✓ Sécurité renforcée</p></div>
-                        </div>
-                    </div>
-                </div>
+                <!-- ...contenu spécifique à la page... -->
             </div>
         </main>
         <script>
@@ -565,7 +511,6 @@
             // Génération de la sidebar
             function renderSidebar() {
                 const sidebarNav = document.getElementById("sidebarNav");
-                if (!sidebarNav) return;
                 sidebarNav.innerHTML = "";
                 subFeatures.forEach((sf) => {
                     const btn = document.createElement("button");

@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+        <title>Bibliothèque de Documents - Aide Vente</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:400,500,700&display=swap" />
         <style>
             /* Base */
@@ -370,22 +370,16 @@
                 <div class="logo">
                     <img src="/files/logo/yeddir_svg.svg" alt="Logo Yeddir" />
                 </div>
-                <nav class="nav-container" id="navContainer">
-                    <!-- La navigation principale sera générée par JS -->
-                </nav>
+                <nav class="nav-container" id="navContainer"></nav>
             </div>
         </header>
         <!-- Breadcrumb -->
         <nav class="breadcrumb" id="breadcrumb">
-            <span class="breadcrumb-item"
-                ><a class="breadcrumb-link" href="#" onclick="goToOverview('aidevente')">Fonctionnalités</a></span
-            >
+            <span class="breadcrumb-item"><a class="breadcrumb-link" href="#" onclick="goToOverview('aidevente')">Fonctionnalités</a></span>
             <span class="breadcrumb-separator">›</span>
-            <span class="breadcrumb-item"
-                ><a class="breadcrumb-link" href="#" onclick="goToOverview('aidevente')">Aide à la vente</a></span
-            >
+            <span class="breadcrumb-item"><a class="breadcrumb-link" href="#" onclick="goToOverview('aidevente')">Aide à la vente</a></span>
             <span class="breadcrumb-separator">›</span>
-            <span class="breadcrumb-item">CPQ (Configure/Price/Quote)</span>
+            <span class="breadcrumb-item">CPQ</span>
         </nav>
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
@@ -558,7 +552,6 @@
             // Génération de la sidebar
             function renderSidebar() {
                 const sidebarNav = document.getElementById("sidebarNav");
-                if (!sidebarNav) return;
                 sidebarNav.innerHTML = "";
                 subFeatures.forEach((sf) => {
                     const btn = document.createElement("button");
@@ -575,6 +568,11 @@
             function goToSubFeature(subFeatureId) {
                 window.location.href = `${subFeatureId}.html`;
             }
+            renderNav();
+            renderSidebar();
+                window.location.href = `${subFeatureId}.html`;
+            
+
             renderNav();
             renderSidebar();
         </script>

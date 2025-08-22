@@ -2,8 +2,9 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8" />
+        <title>Sales Inbox</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+        
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:400,500,700&display=swap" />
        <style>/* Base */
 body {
@@ -515,7 +516,6 @@ body {
             }
             function renderSidebar() {
                 const sidebarNav = document.getElementById("sidebarNav");
-                if (!sidebarNav) return;
                 sidebarNav.innerHTML = "";
                 subFeatures.forEach((sf) => {
                     const btn = document.createElement("button");
@@ -533,13 +533,9 @@ body {
             }
             renderNav();
             renderSidebar();
-        </script>
-    </body>
-</html>
                     // Redirige vers la page détaillée correspondante ou affiche une alerte
                     alert(`Page détaillée pour "${subFeatureId}" non implémentée.`);
-                }
-            }
+              
             // Initialisation
             renderNav();
             renderSidebar();
