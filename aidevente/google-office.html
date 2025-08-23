@@ -436,7 +436,7 @@
                     const button = document.createElement("button");
                     button.className = "nav-button" + (feature.id === "aidevente" ? " active" : "");
                     button.textContent = feature.title;
-                    button.onclick = () => (window.location.href = `/${feature.id}.html`);
+                    button.onclick = () => (window.location.href = "/index.html");
                     navItem.appendChild(button);
                     if (feature.id === "aidevente") {
                         const dropdown = document.createElement("div");
@@ -449,7 +449,7 @@
                             const dropdownItem = document.createElement("div");
                             dropdownItem.className = "dropdown-item";
                             dropdownItem.textContent = sf.title;
-                            dropdownItem.onclick = () => (window.location.href = `${sf.id}.html`);
+                            dropdownItem.onclick = () => (window.location.href = `/aidevente/${sf.id}.html`);
                             dropdown.appendChild(dropdownItem);
                         });
                         navItem.appendChild(dropdown);
@@ -516,7 +516,7 @@
                     const btn = document.createElement("button");
                     btn.className = "sidebar-item" + (sf.id === "google-office" ? " active" : "");
                     btn.textContent = sf.title;
-                    btn.onclick = () => (window.location.href = `${sf.id}.html`);
+                    btn.onclick = () => (window.location.href = `/aidevente/${sf.id}.html`);
                     sidebarNav.appendChild(btn);
                 });
             }
@@ -525,7 +525,7 @@
                 window.location.href = `/${featureId}.html`;
             }
             function goToSubFeature(subFeatureId) {
-                window.location.href = `${subFeatureId}.html`;
+                window.location.href = `/aidevente/${subFeatureId}.html`;
             }
             renderNav();
             renderSidebar();
