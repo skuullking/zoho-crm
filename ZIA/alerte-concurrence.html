@@ -361,6 +361,78 @@
                     padding: 10px;
                 }
             }
+            .detailed-image,
+            .detailed-video {
+                max-width: 100%;
+                height: auto;
+                border-radius: 12px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Responsive */
+            @media (max-width: 992px) {
+                .main-content {
+                    margin-left: 0;
+                    margin-top: 120px;
+                }
+                .sidebar {
+                    position: static;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    overflow-x: auto;
+                    border-right: none;
+                    box-shadow: none;
+                }
+                .sidebar-item {
+                    flex: 1;
+                    min-width: 100px;
+                    border: none;
+                    border-bottom: 2px solid transparent;
+                }
+                .sidebar-item.active {
+                    border-bottom: 2px solid #4f46e5;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .header {
+                    height: 60px;
+                }
+                .header-content {
+                    padding: 0 12px;
+                }
+                .logo img {
+                    height: 28px;
+                }
+                .breadcrumb {
+                    top: 60px;
+                    height: 38px;
+                    font-size: 12px;
+                    padding: 0 8px;
+                }
+                .detailed-title {
+                    font-size: 24px;
+                }
+                .detailed-subtitle {
+                    font-size: 16px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .detailed-title {
+                    font-size: 18px;
+                }
+                .detailed-section h3 {
+                    font-size: 14px;
+                }
+                .detailed-subtitle {
+                    font-size: 14px;
+                }
+                .detailed-feature-card {
+                    padding: 10px;
+                }
+            }
         </style>
     </head>
     <body>
@@ -469,19 +541,19 @@
                 {id: "plateforme", title: "Outils de développeur"},
             ];
             const subFeatures = [
-                {id: "alerte-concurrence", title: "Alerte concurrence"},
                 {id: "assistante-commerciale", title: "Assistante commerciale"},
-                {id: "automatisation-intelligente", title: "Automatisation intelligente"},
-                {id: "best-time-contact", title: "Best time to contact"},
-                {id: "detection-anomalies", title: "Détection d'anomalies"},
-                {id: "enrichissement-donnees", title: "Enrichissement de données"},
-                {id: "generateur-predictions", title: "Générateur de prédictions"},
                 {id: "predictions", title: "Prédictions"},
+                {id: "detection-anomalies", title: "Détection d'anomalies"},
+                {id: "zia-emails", title: "Zia pour les e-mails"},
+                {id: "automatisation-intelligente", title: "Automatisation intelligente"},
+                {id: "alerte-concurrence", title: "Alerte à la concurrence"},
+                {id: "enrichissement-donnees", title: "Enrichissement des données"},
                 {id: "recommandation", title: "Recommandation"},
+                {id: "generateur-predictions", title: "Générateur de prédictions"},
                 {id: "suggestion-affectation", title: "Suggestion d'affectation"},
                 {id: "suggestion-workflows", title: "Suggestion de workflows"},
-                {id: "zia-emails", title: "ZIA Emails"},
-                {id: "zia-vision", title: "ZIA Vision"},
+                {id: "best-time-contact", title: "Best Time to Contact"},
+                {id: "zia-vision", title: "Zia Vision"},
             ];
             function renderNav() {
                 const navContainer = document.getElementById("navContainer");

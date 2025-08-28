@@ -2,8 +2,8 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8" />
+        <title>Attribution Marketing</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>A/B Testing - Yeddir</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:400,500,700&display=swap" />
         <style>
             /* Base */
@@ -361,6 +361,78 @@
                     padding: 10px;
                 }
             }
+            .detailed-image,
+            .detailed-video {
+                max-width: 100%;
+                height: auto;
+                border-radius: 12px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Responsive */
+            @media (max-width: 992px) {
+                .main-content {
+                    margin-left: 0;
+                    margin-top: 120px;
+                }
+                .sidebar {
+                    position: static;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    overflow-x: auto;
+                    border-right: none;
+                    box-shadow: none;
+                }
+                .sidebar-item {
+                    flex: 1;
+                    min-width: 100px;
+                    border: none;
+                    border-bottom: 2px solid transparent;
+                }
+                .sidebar-item.active {
+                    border-bottom: 2px solid #4f46e5;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .header {
+                    height: 60px;
+                }
+                .header-content {
+                    padding: 0 12px;
+                }
+                .logo img {
+                    height: 28px;
+                }
+                .breadcrumb {
+                    top: 60px;
+                    height: 38px;
+                    font-size: 12px;
+                    padding: 0 8px;
+                }
+                .detailed-title {
+                    font-size: 24px;
+                }
+                .detailed-subtitle {
+                    font-size: 16px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .detailed-title {
+                    font-size: 18px;
+                }
+                .detailed-section h3 {
+                    font-size: 14px;
+                }
+                .detailed-subtitle {
+                    font-size: 14px;
+                }
+                .detailed-feature-card {
+                    padding: 10px;
+                }
+            }
         </style>
     </head>
     <body>
@@ -370,9 +442,7 @@
                 <div class="logo">
                     <img src="/image_video/yeddir-logo.svg" alt="Logo Yeddir" />
                 </div>
-                <nav class="nav-container" id="navContainer">
-                    <!-- La navigation principale sera générée par JS -->
-                </nav>
+                <nav class="nav-container" id="navContainer"></nav>
             </div>
         </header>
         <!-- Breadcrumb -->
@@ -382,14 +452,16 @@
             >
             <span class="breadcrumb-separator">›</span>
             <span class="breadcrumb-item"
-                ><a class="breadcrumb-link" href="#" onclick="goToOverview('marketing')">Marketing</a></span
+                ><a class="breadcrumb-link" href="#" onclick="goToOverview('marketing')"
+                    >Automatisation du marketing</a
+                ></span
             >
             <span class="breadcrumb-separator">›</span>
-            <span class="breadcrumb-item">A/B Testing</span>
+            <span class="breadcrumb-item">Attribution marketing</span>
         </nav>
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <div class="sidebar-title" id="sidebarTitle">Marketing</div>
+                <div class="sidebar-title" id="sidebarTitle">Automatisation du marketing</div>
                 <div class="sidebar-subtitle">Navigation</div>
             </div>
             <nav class="sidebar-nav" id="sidebarNav"></nav>
@@ -397,48 +469,57 @@
         <main class="main-content" id="mainContent">
             <div class="container">
                 <div class="detailed-hero">
-                    <h1 class="detailed-title">A/B Testing</h1>
-                    <p class="detailed-subtitle">Optimisation de campagnes par expérimentation</p>
+                    <h1 class="detailed-title">Attribution marketing</h1>
+                    <p class="detailed-subtitle">
+                        Mesurez l'impact de chaque canal et optimisez vos investissements marketing
+                    </p>
                 </div>
                 <div class="detailed-content">
                     <div class="detailed-section">
                         <h3>Vue d'ensemble</h3>
                         <p>
-                            Testez différentes versions de vos emails, pages ou messages pour identifier celles qui
-                            offrent le meilleur taux de conversion.
+                            Identifiez précisément les canaux et campagnes qui génèrent le plus de valeur pour votre
+                            entreprise grâce à l'attribution marketing avancée.
                         </p>
                     </div>
                     <div class="detailed-media">
-                        <img src="/image_video/marketing/a-b-testing.svg" alt="A/B Testing" class="detailed-image" />
+                        <img
+                            src="/image_video/marketing/attribution-marketing.png"
+                            alt="Attribution marketing"
+                            class="detailed-image"
+                        />
                     </div>
                     <div class="detailed-section">
                         <h3>Fonctionnalités clés</h3>
                         <div class="detailed-features-grid">
                             <div class="detailed-feature-card">
-                                <h4>Expérimentation multi-variée</h4>
-                                <p>Test de plusieurs versions sur un même segment de contacts.</p>
+                                <h4>Modèles d'attribution multiples</h4>
+                                <p>
+                                    Comparez les modèles (premier clic, dernier clic, linéaire, etc.) pour une analyse
+                                    complète.
+                                </p>
                             </div>
                             <div class="detailed-feature-card">
-                                <h4>Analyse automatique</h4>
-                                <p>Mesure statistique des performances (taux d'ouverture, clic, conversion...)</p>
+                                <h4>Suivi cross-canal</h4>
+                                <p>Mesurez l'impact de chaque point de contact sur le parcours client.</p>
                             </div>
                             <div class="detailed-feature-card">
-                                <h4>Sélection automatique du gagnant</h4>
-                                <p>Le système bascule automatiquement vers la version la plus performante.</p>
+                                <h4>Rapports détaillés</h4>
+                                <p>Visualisez la contribution de chaque campagne à vos conversions et ventes.</p>
                             </div>
                             <div class="detailed-feature-card">
-                                <h4>Reporting détaillé</h4>
-                                <p>Visualisation claire des résultats et recommandations d'optimisation.</p>
+                                <h4>Optimisation budgétaire</h4>
+                                <p>Réallouez vos budgets vers les canaux les plus performants.</p>
                             </div>
                         </div>
                     </div>
                     <div class="detailed-section">
                         <h3>Bénéfices</h3>
                         <div class="detailed-features-grid">
-                            <div class="detailed-feature-card"><p>✓ Amélioration du ROI</p></div>
+                            <div class="detailed-feature-card"><p>✓ ROI marketing maximisé</p></div>
                             <div class="detailed-feature-card"><p>✓ Décisions data-driven</p></div>
-                            <div class="detailed-feature-card"><p>✓ Optimisation continue</p></div>
-                            <div class="detailed-feature-card"><p>✓ Réduction des risques</p></div>
+                            <div class="detailed-feature-card"><p>✓ Visibilité sur tout le parcours client</p></div>
+                            <div class="detailed-feature-card"><p>✓ Meilleure allocation des ressources</p></div>
                         </div>
                     </div>
                 </div>
@@ -462,149 +543,72 @@
                 {id: "plateforme", title: "Outils de développeur"},
             ];
             const subFeatures = [
-                {id: "a-b-testing", title: "A/B Testing"},
-                {id: "automatisation-campagnes", title: "Automatisation des campagnes"},
+                {id: "segmentation-clients", title: "Segmentation des clients"},
+                {id: "maturation-leads", title: "Maturation des leads"},
+                {id: "formulaires-web-marketing", title: "Formulaires web marketing"},
+                {id: "scanner-cartes-visite", title: "Scanner cartes de visite"},
+                {id: "attribution-marketing", title: "Attribution marketing"},
+                {id: "campagnes-google", title: "Campagnes Google"},
+                {id: "gestion-evenements", title: "Gestion d'événements"},
                 {id: "campagnes-email", title: "Campagnes email"},
-                {id: "campagnes-sms", title: "Campagnes SMS"},
-                {id: "formulaires-marketing", title: "Formulaires marketing"},
-                {id: "landing-pages", title: "Landing pages"},
-                {id: "lead-nurturing", title: "Lead nurturing"},
-                {id: "score-leads-marketing", title: "Score des leads marketing"},
-                {id: "segmentation", title: "Segmentation"},
-                {id: "social-marketing", title: "Social marketing"},
-                {id: "tracking-web", title: "Tracking web"},
-                {id: "webinars", title: "Webinars"},
+                {id: "campagnes-sondages", title: "Campagnes sondages"},
+                {id: "sous-campagnes", title: "Sous-campagnes"},
+                {id: "analyse-marketing", title: "Analyse marketing"},
             ];
+            // Génération de la nav principale
             function renderNav() {
                 const navContainer = document.getElementById("navContainer");
                 navContainer.innerHTML = "";
-
                 mainFeatures.forEach((feature) => {
                     const navItem = document.createElement("div");
                     navItem.className = "nav-item";
-
                     const button = document.createElement("button");
-                    button.className = "nav-button" + (feature.id === "automatisation" ? " active" : "");
+                    button.className = "nav-button" + (feature.id === "marketing" ? " active" : "");
                     button.textContent = feature.title;
-
-                    // MODIFIÉ : Redirige vers index.html avec le paramètre feature
                     button.onclick = () => {
-                        window.location.href = `/index.html?feature=${feature.id}`;
+                        window.location.href = "/index.html";
                     };
-
                     navItem.appendChild(button);
-
-                    // Dropdown pour les sous-fonctionnalités de "automatisation"
-                    if (feature.id === "automatisation") {
+                    if (feature.id === "marketing") {
                         const dropdown = document.createElement("div");
                         dropdown.className = "dropdown-menu";
-
                         const dropdownTitle = document.createElement("h3");
                         dropdownTitle.className = "dropdown-title";
                         dropdownTitle.textContent = feature.title;
                         dropdown.appendChild(dropdownTitle);
-
                         subFeatures.forEach((sf) => {
                             const dropdownItem = document.createElement("div");
                             dropdownItem.className = "dropdown-item";
                             dropdownItem.textContent = sf.title;
-
-                            // MODIFIÉ : Redirige vers index.html avec feature et section
-                            dropdownItem.onclick = () => {
-                                window.location.href = `/index.html?feature=${feature.id}&section=${sf.id}`;
-                            };
-
+                            dropdownItem.onclick = () => (window.location.href = `/marketing/${sf.id}.html`);
                             dropdown.appendChild(dropdownItem);
                         });
-
                         navItem.appendChild(dropdown);
-
                         navItem.onmouseenter = () => dropdown.classList.add("show");
                         navItem.onmouseleave = () => dropdown.classList.remove("show");
                     }
-
                     navContainer.appendChild(navItem);
                 });
             }
-            // Dans fonctionnalites.html - Gestion du hash
-            function parseHash() {
-                const hash = window.location.hash.substring(1); // Retire le #
-
-                if (!hash) return {feature: "automatisation", section: null};
-
-                const parts = hash.split("-");
-                return {
-                    feature: parts[0] || "automatisation",
-                    section: parts[1] || null,
-                };
-            }
-
-            function init() {
-                const {feature, section} = parseHash();
-
-                if (featuresData[feature]) {
-                    activeFeature = feature;
-                }
-
-                renderNavigation();
-                renderContent();
-                setupIntersectionObserver();
-
-                if (section) {
-                    setTimeout(() => {
-                        scrollToSection(section);
-                    }, 500);
-                } else if (featuresData[activeFeature] && featuresData[activeFeature].subFeatures.length > 0) {
-                    setTimeout(() => {
-                        scrollToSection(featuresData[activeFeature].subFeatures[0].id);
-                    }, 100);
-                }
-            }
-
-            // Écouter les changements de hash
-            window.addEventListener("hashchange", function () {
-                const {feature, section} = parseHash();
-
-                if (feature !== activeFeature) {
-                    setActiveFeature(feature);
-                }
-
-                if (section) {
-                    setTimeout(() => {
-                        scrollToSection(section);
-                    }, 100);
-                }
-            });
             // Génération de la sidebar
             function renderSidebar() {
                 const sidebarNav = document.getElementById("sidebarNav");
                 sidebarNav.innerHTML = "";
                 subFeatures.forEach((sf) => {
                     const btn = document.createElement("button");
-                    btn.className = "sidebar-item" + (sf.id === "a-b-testing" ? " active" : "");
+                    btn.className = "sidebar-item" + (sf.id === "attribution-marketing" ? " active" : "");
                     btn.textContent = sf.title;
-                    btn.onclick = () => (window.location.href = `${sf.id}.html`);
+                    btn.onclick = () => (window.location.href = `/marketing/${sf.id}.html`);
                     sidebarNav.appendChild(btn);
                 });
             }
-            // Navigation (adaptable selon votre intégration SPA/routing)
             function goToOverview(featureId) {
-                if (featureId === "automatisation") {
-                    window.location.href = "index.html"; // ou la page d'accueil principale
+                if (featureId === "marketing") {
+                    window.location.href = "/marketing/attribution-marketing.html";
                 } else {
-                    // Redirige vers la page correspondante
-                    alert(`Redirection vers la fonctionnalité "${featureId}"`);
+                    window.location.href = `/${featureId}.html`;
                 }
             }
-            function goToSubFeature(subFeatureId) {
-                if (subFeatureId === "gestion-leads") {
-                    window.scrollTo({top: 0, behavior: "smooth"});
-                } else {
-                    // Redirige vers la page détaillée correspondante ou affiche une alerte
-                    alert(`Page détaillée pour "${subFeatureId}" non implémentée.`);
-                }
-            }
-            // Initialisation
             renderNav();
             renderSidebar();
         </script>

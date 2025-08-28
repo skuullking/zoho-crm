@@ -305,40 +305,21 @@
                 }
                 .sidebar {
                     position: static;
-                    width: 100vw;
+                    width: 100%;
                     display: flex;
                     flex-direction: row;
                     overflow-x: auto;
                     border-right: none;
                     box-shadow: none;
-                    height: auto;
-                    top: 60px;
-                }
-                .sidebar-header {
-                    display: none;
-                }
-                .sidebar-nav {
-                    display: flex;
-                    flex-direction: row;
-                    width: 100vw;
                 }
                 .sidebar-item {
                     flex: 1;
-                    min-width: 120px;
+                    min-width: 100px;
                     border: none;
                     border-bottom: 2px solid transparent;
-                    border-left: none;
-                    border-radius: 0;
-                    padding: 10px 12px;
-                    font-size: 13px;
-                    white-space: nowrap;
                 }
-                .sidebar-item.active,
-                .sidebar-item:hover {
-                    background: #eef2ff;
-                    color: #4f46e5;
+                .sidebar-item.active {
                     border-bottom: 2px solid #4f46e5;
-                    border-left: none;
                 }
             }
 
@@ -347,7 +328,7 @@
                     height: 60px;
                 }
                 .header-content {
-                    padding: 0 8px;
+                    padding: 0 12px;
                 }
                 .logo img {
                     height: 28px;
@@ -355,29 +336,23 @@
                 .breadcrumb {
                     top: 60px;
                     height: 38px;
-                    font-size: 13px;
+                    font-size: 12px;
                     padding: 0 8px;
                 }
                 .detailed-title {
-                    font-size: 22px;
+                    font-size: 24px;
                 }
-                .detailed-section h3 {
+                .detailed-subtitle {
                     font-size: 16px;
-                }
-                .detailed-features-grid {
-                    grid-template-columns: 1fr;
-                }
-                .detailed-content {
-                    padding: 0 4px;
                 }
             }
 
             @media (max-width: 480px) {
                 .detailed-title {
-                    font-size: 16px;
+                    font-size: 18px;
                 }
                 .detailed-section h3 {
-                    font-size: 13px;
+                    font-size: 14px;
                 }
                 .detailed-subtitle {
                     font-size: 14px;
@@ -385,8 +360,77 @@
                 .detailed-feature-card {
                     padding: 10px;
                 }
-                .container {
-                    padding: 0 2px;
+            }
+            .detailed-image,
+            .detailed-video {
+                max-width: 100%;
+                height: auto;
+                border-radius: 12px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Responsive */
+            @media (max-width: 992px) {
+                .main-content {
+                    margin-left: 0;
+                    margin-top: 120px;
+                }
+                .sidebar {
+                    position: static;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    overflow-x: auto;
+                    border-right: none;
+                    box-shadow: none;
+                }
+                .sidebar-item {
+                    flex: 1;
+                    min-width: 100px;
+                    border: none;
+                    border-bottom: 2px solid transparent;
+                }
+                .sidebar-item.active {
+                    border-bottom: 2px solid #4f46e5;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .header {
+                    height: 60px;
+                }
+                .header-content {
+                    padding: 0 12px;
+                }
+                .logo img {
+                    height: 28px;
+                }
+                .breadcrumb {
+                    top: 60px;
+                    height: 38px;
+                    font-size: 12px;
+                    padding: 0 8px;
+                }
+                .detailed-title {
+                    font-size: 24px;
+                }
+                .detailed-subtitle {
+                    font-size: 16px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .detailed-title {
+                    font-size: 18px;
+                }
+                .detailed-section h3 {
+                    font-size: 14px;
+                }
+                .detailed-subtitle {
+                    font-size: 14px;
+                }
+                .detailed-feature-card {
+                    padding: 10px;
                 }
             }
         </style>
@@ -494,17 +538,19 @@
                 {id: "plateforme", title: "Outils de développeur"},
             ];
             const subFeatures = [
-                {id: "alertes-notifications", title: "Alertes & notifications"},
-                {id: "assistants", title: "Assistants"},
-                {id: "bibliotheque-documents", title: "Bibliothèque de documents"},
-                {id: "calendrier", title: "Calendrier"},
-                {id: "cpq", title: "CPQ"},
                 {id: "finance", title: "Finance"},
-                {id: "google-office", title: "Google & Office"},
-                {id: "mobile-aide", title: "Mobile aide"},
+                {id: "cpq", title: "CPQ (Configure/Price/Quote)"},
+                {id: "bibliotheque-documents", title: "Bibliothèque de documents"},
                 {id: "portails", title: "Portails"},
+                {id: "assistants", title: "Assistants"},
+                {id: "calendrier", title: "Calendrier"},
                 {id: "salesinbox", title: "SalesInbox"},
-                {id: "zoho-meeting", title: "Zoho Meeting"},
+                {id: "zoho-meeting", title: "Intégration de Zoho Meeting"},
+                {id: "google-office", title: "Google Workspace et Office 365"},
+                {id: "alertes-notifications", title: "Alertes et notifications"},
+                {id: "gestion-transactions", title: "Gestion des transactions"},
+                {id: "gestion-comptes", title: "Gestion des comptes"},
+                {id: "mobile-aide", title: "Mobile"},
             ];
             function renderNav() {
                 const navContainer = document.getElementById("navContainer");
@@ -516,7 +562,11 @@
                     button.className = "nav-button" + (feature.id === "aidevente" ? " active" : "");
                     button.textContent = feature.title;
                     button.onclick = () => {
-                        window.location.href = "/index.html";
+                        if (feature.id === "aidevente") {
+                            window.location.href = "/aidevente/alertes-notifications.html";
+                        } else {
+                            window.location.href = `/${feature.id}.html`;
+                        }
                     };
                     navItem.appendChild(button);
                     if (feature.id === "aidevente") {
@@ -563,15 +613,9 @@
             }
             renderNav();
             renderSidebar();
-            const sidebarNav = document.getElementById("sidebarNav");
-            sidebarNav.innerHTML = "";
-            subFeatures.forEach((sf) => {
-                const btn = document.createElement("button");
-                btn.className = "sidebar-item" + (sf.id === "alertes-notifications" ? " active" : "");
-                btn.textContent = sf.title;
-                btn.onclick = () => (window.location.href = `/aidevente/${sf.id}.html`);
-                sidebarNav.appendChild(btn);
-            });
+        </script>
+    </body>
+</html>
             function goToOverview(featureId) {
                 // Correction : overview de la feature
                 window.location.href = `/${featureId}.html`;

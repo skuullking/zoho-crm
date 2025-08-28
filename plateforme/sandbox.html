@@ -361,6 +361,78 @@
                     padding: 10px;
                 }
             }
+            .detailed-image,
+            .detailed-video {
+                max-width: 100%;
+                height: auto;
+                border-radius: 12px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Responsive */
+            @media (max-width: 992px) {
+                .main-content {
+                    margin-left: 0;
+                    margin-top: 120px;
+                }
+                .sidebar {
+                    position: static;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    overflow-x: auto;
+                    border-right: none;
+                    box-shadow: none;
+                }
+                .sidebar-item {
+                    flex: 1;
+                    min-width: 100px;
+                    border: none;
+                    border-bottom: 2px solid transparent;
+                }
+                .sidebar-item.active {
+                    border-bottom: 2px solid #4f46e5;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .header {
+                    height: 60px;
+                }
+                .header-content {
+                    padding: 0 12px;
+                }
+                .logo img {
+                    height: 28px;
+                }
+                .breadcrumb {
+                    top: 60px;
+                    height: 38px;
+                    font-size: 12px;
+                    padding: 0 8px;
+                }
+                .detailed-title {
+                    font-size: 24px;
+                }
+                .detailed-subtitle {
+                    font-size: 16px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .detailed-title {
+                    font-size: 18px;
+                }
+                .detailed-section h3 {
+                    font-size: 14px;
+                }
+                .detailed-subtitle {
+                    font-size: 14px;
+                }
+                .detailed-feature-card {
+                    padding: 10px;
+                }
+            }
         </style>
     </head>
     <body>
@@ -376,6 +448,77 @@
             </div>
         </header>
 
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb" id="breadcrumb">
+            <span class="breadcrumb-item"
+                ><a class="breadcrumb-link" href="#" onclick="goToOverview('plateforme')">Fonctionnalités</a></span
+            >
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-item"
+                ><a class="breadcrumb-link" href="#" onclick="goToOverview('plateforme')"
+                    >Outils de développeur</a
+                ></span
+            >
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-item">Sandbox</span>
+        </nav>
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title" id="sidebarTitle">Outils de développeur</div>
+                <div class="sidebar-subtitle">Navigation</div>
+            </div>
+            <nav class="sidebar-nav" id="sidebarNav"></nav>
+        </aside>
+        <main class="main-content" id="mainContent">
+            <div class="container">
+                <div class="detailed-hero">
+                    <h1 class="detailed-title">Sandbox</h1>
+                    <p class="detailed-subtitle">Testez vos personnalisations en toute sécurité</p>
+                </div>
+                <div class="detailed-content">
+                    <div class="detailed-section">
+                        <h3>Vue d'ensemble</h3>
+                        <p>
+                            Expérimentez et validez vos développements, automatisations et intégrations dans un
+                            environnement isolé avant de les déployer en production.
+                        </p>
+                    </div>
+                    <div class="detailed-media">
+                        <img src="/image_video/outil-de-developpeur/sandbox.svg" alt="Sandbox" class="detailed-image" />
+                    </div>
+                    <div class="detailed-section">
+                        <h3>Fonctionnalités clés</h3>
+                        <div class="detailed-features-grid">
+                            <div class="detailed-feature-card">
+                                <h4>Environnement isolé</h4>
+                                <p>Testez sans impacter vos données ou utilisateurs réels.</p>
+                            </div>
+                            <div class="detailed-feature-card">
+                                <h4>Déploiement contrôlé</h4>
+                                <p>Validez chaque modification avant mise en production.</p>
+                            </div>
+                            <div class="detailed-feature-card">
+                                <h4>Simulation d'intégrations</h4>
+                                <p>Vérifiez le comportement de vos API, scripts et workflows.</p>
+                            </div>
+                            <div class="detailed-feature-card">
+                                <h4>Gestion des versions</h4>
+                                <p>Gardez un historique de vos tests et restaurations.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detailed-section">
+                        <h3>Bénéfices</h3>
+                        <div class="detailed-features-grid">
+                            <div class="detailed-feature-card"><p>✓ Réduction des risques d'erreur</p></div>
+                            <div class="detailed-feature-card"><p>✓ Déploiement plus serein</p></div>
+                            <div class="detailed-feature-card"><p>✓ Amélioration continue facilitée</p></div>
+                            <div class="detailed-feature-card"><p>✓ Collaboration entre équipes IT et métier</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
         <script>
             // NAVIGATION ET SIDEBAR - même logique que page principale
             // Structure simplifiée pour cette vue
@@ -502,13 +645,14 @@
                     }, 100);
                 }
             });
+            let currentSubFeatureId = "sandbox";
             // Génération de la sidebar
             function renderSidebar() {
                 const sidebarNav = document.getElementById("sidebarNav");
                 sidebarNav.innerHTML = "";
                 subFeatures.forEach((sf) => {
                     const btn = document.createElement("button");
-                    btn.className = "sidebar-item" + (sf.id === "sandbox" ? " active" : "");
+                    btn.className = "sidebar-item" + (sf.id === currentSubFeatureId ? " active" : "");
                     btn.textContent = sf.title;
                     btn.onclick = () => (window.location.href = `${sf.id}.html`);
                     sidebarNav.appendChild(btn);

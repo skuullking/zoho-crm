@@ -2,8 +2,8 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8" />
+        <title>Maturation des Leads</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Formulaires Marketing - Yeddir</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:400,500,700&display=swap" />
         <style>
             /* Base */
@@ -361,6 +361,78 @@
                     padding: 10px;
                 }
             }
+            .detailed-image,
+            .detailed-video {
+                max-width: 100%;
+                height: auto;
+                border-radius: 12px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Responsive */
+            @media (max-width: 992px) {
+                .main-content {
+                    margin-left: 0;
+                    margin-top: 120px;
+                }
+                .sidebar {
+                    position: static;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    overflow-x: auto;
+                    border-right: none;
+                    box-shadow: none;
+                }
+                .sidebar-item {
+                    flex: 1;
+                    min-width: 100px;
+                    border: none;
+                    border-bottom: 2px solid transparent;
+                }
+                .sidebar-item.active {
+                    border-bottom: 2px solid #4f46e5;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .header {
+                    height: 60px;
+                }
+                .header-content {
+                    padding: 0 12px;
+                }
+                .logo img {
+                    height: 28px;
+                }
+                .breadcrumb {
+                    top: 60px;
+                    height: 38px;
+                    font-size: 12px;
+                    padding: 0 8px;
+                }
+                .detailed-title {
+                    font-size: 24px;
+                }
+                .detailed-subtitle {
+                    font-size: 16px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .detailed-title {
+                    font-size: 18px;
+                }
+                .detailed-section h3 {
+                    font-size: 14px;
+                }
+                .detailed-subtitle {
+                    font-size: 14px;
+                }
+                .detailed-feature-card {
+                    padding: 10px;
+                }
+            }
         </style>
     </head>
     <body>
@@ -370,9 +442,7 @@
                 <div class="logo">
                     <img src="/image_video/yeddir-logo.svg" alt="Logo Yeddir" />
                 </div>
-                <nav class="nav-container" id="navContainer">
-                    <!-- La navigation principale sera générée par JS -->
-                </nav>
+                <nav class="nav-container" id="navContainer"></nav>
             </div>
         </header>
         <!-- Breadcrumb -->
@@ -382,14 +452,16 @@
             >
             <span class="breadcrumb-separator">›</span>
             <span class="breadcrumb-item"
-                ><a class="breadcrumb-link" href="#" onclick="goToOverview('marketing')">Marketing</a></span
+                ><a class="breadcrumb-link" href="#" onclick="goToOverview('marketing')"
+                    >Automatisation du marketing</a
+                ></span
             >
             <span class="breadcrumb-separator">›</span>
-            <span class="breadcrumb-item">Formulaires marketing</span>
+            <span class="breadcrumb-item">Maturation des leads</span>
         </nav>
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <div class="sidebar-title" id="sidebarTitle">Marketing</div>
+                <div class="sidebar-title" id="sidebarTitle">Automatisation du marketing</div>
                 <div class="sidebar-subtitle">Navigation</div>
             </div>
             <nav class="sidebar-nav" id="sidebarNav"></nav>
@@ -397,21 +469,23 @@
         <main class="main-content" id="mainContent">
             <div class="container">
                 <div class="detailed-hero">
-                    <h1 class="detailed-title">Formulaires marketing</h1>
-                    <p class="detailed-subtitle">Génération de leads automatisée</p>
+                    <h1 class="detailed-title">Maturation des leads</h1>
+                    <p class="detailed-subtitle">
+                        Accompagnez vos prospects jusqu'à la conversion grâce à des scénarios automatisés
+                    </p>
                 </div>
                 <div class="detailed-content">
                     <div class="detailed-section">
                         <h3>Vue d'ensemble</h3>
                         <p>
-                            Créez et intégrez facilement des formulaires web pour collecter automatiquement des leads
-                            qualifiés dans votre CRM.
+                            Automatisez le suivi et la qualification de vos leads avec des campagnes de nurturing
+                            personnalisées et adaptées à chaque étape du parcours client.
                         </p>
                     </div>
                     <div class="detailed-media">
                         <img
-                            src="/image_video/marketing/formulaires-marketing.svg"
-                            alt="Formulaires marketing"
+                            src="/image_video/marketing/maturation-leads.png"
+                            alt="Maturation des leads"
                             class="detailed-image"
                         />
                     </div>
@@ -419,38 +493,42 @@
                         <h3>Fonctionnalités clés</h3>
                         <div class="detailed-features-grid">
                             <div class="detailed-feature-card">
-                                <h4>Créateur drag-and-drop</h4>
-                                <p>Génération de formulaires sans code avec validation automatique.</p>
+                                <h4>Scénarios automatisés</h4>
+                                <p>
+                                    Définissez des workflows d'emails, notifications et tâches selon le comportement du
+                                    lead.
+                                </p>
                             </div>
                             <div class="detailed-feature-card">
-                                <h4>Champ conditionnel</h4>
-                                <p>Affichage dynamique des champs selon les réponses précédentes.</p>
+                                <h4>Personnalisation avancée</h4>
+                                <p>Adaptez les messages et contenus à chaque segment de leads.</p>
                             </div>
                             <div class="detailed-feature-card">
-                                <h4>Intégration directe CRM</h4>
-                                <p>Enregistrement automatique des leads et déclenchement de workflows.</p>
+                                <h4>Scoring dynamique</h4>
+                                <p>
+                                    Évaluez automatiquement la maturité des leads pour prioriser les actions
+                                    commerciales.
+                                </p>
                             </div>
                             <div class="detailed-feature-card">
-                                <h4>Protection anti-spam</h4>
-                                <p>Filtres et captchas avancés pour garantir la qualité des leads.</p>
+                                <h4>Analyse des parcours</h4>
+                                <p>Suivez l'efficacité de vos scénarios et optimisez vos taux de conversion.</p>
                             </div>
                         </div>
                     </div>
                     <div class="detailed-section">
                         <h3>Bénéfices</h3>
                         <div class="detailed-features-grid">
-                            <div class="detailed-feature-card"><p>✓ Génération de leads simplifiée</p></div>
-                            <div class="detailed-feature-card"><p>✓ Qualification automatique</p></div>
-                            <div class="detailed-feature-card"><p>✓ Zéro ressaisie</p></div>
-                            <div class="detailed-feature-card"><p>✓ Gain de temps marketing</p></div>
+                            <div class="detailed-feature-card"><p>✓ Gain de temps pour les équipes</p></div>
+                            <div class="detailed-feature-card"><p>✓ Meilleure qualification</p></div>
+                            <div class="detailed-feature-card"><p>✓ Parcours client optimisé</p></div>
+                            <div class="detailed-feature-card"><p>✓ Augmentation du taux de conversion</p></div>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
         <script>
-            // NAVIGATION ET SIDEBAR - même logique que page principale
-            // Structure simplifiée pour cette vue
             const mainFeatures = [
                 {id: "automatisation", title: "Automatisation de la force de vente"},
                 {id: "processus", title: "Processus de vente"},
@@ -466,149 +544,74 @@
                 {id: "plateforme", title: "Outils de développeur"},
             ];
             const subFeatures = [
-                {id: "a-b-testing", title: "A/B Testing"},
-                {id: "automatisation-campagnes", title: "Automatisation des campagnes"},
+                {id: "segmentation-clients", title: "Segmentation des clients"},
+                {id: "maturation-leads", title: "Maturation des leads"},
+                {id: "formulaires-web-marketing", title: "Formulaires web marketing"},
+                {id: "scanner-cartes-visite", title: "Scanner cartes de visite"},
+                {id: "attribution-marketing", title: "Attribution marketing"},
+                {id: "campagnes-google", title: "Campagnes Google"},
+                {id: "gestion-evenements", title: "Gestion d'événements"},
                 {id: "campagnes-email", title: "Campagnes email"},
-                {id: "campagnes-sms", title: "Campagnes SMS"},
-                {id: "formulaires-marketing", title: "Formulaires marketing"},
-                {id: "landing-pages", title: "Landing pages"},
-                {id: "lead-nurturing", title: "Lead nurturing"},
-                {id: "score-leads-marketing", title: "Score des leads marketing"},
-                {id: "segmentation", title: "Segmentation"},
-                {id: "social-marketing", title: "Social marketing"},
-                {id: "tracking-web", title: "Tracking web"},
-                {id: "webinars", title: "Webinars"},
+                {id: "campagnes-sondages", title: "Campagnes sondages"},
+                {id: "sous-campagnes", title: "Sous-campagnes"},
+                {id: "analyse-marketing", title: "Analyse marketing"},
             ];
             function renderNav() {
                 const navContainer = document.getElementById("navContainer");
                 navContainer.innerHTML = "";
-
                 mainFeatures.forEach((feature) => {
                     const navItem = document.createElement("div");
                     navItem.className = "nav-item";
-
                     const button = document.createElement("button");
-                    button.className = "nav-button" + (feature.id === "automatisation" ? " active" : "");
+                    button.className = "nav-button" + (feature.id === "marketing" ? " active" : "");
                     button.textContent = feature.title;
-
-                    // MODIFIÉ : Redirige vers index.html avec le paramètre feature
                     button.onclick = () => {
-                        window.location.href = `/index.html?feature=${feature.id}`;
+                        if (feature.id === "marketing") {
+                            window.location.href = "/marketing/maturation-leads.html";
+                        } else {
+                            window.location.href = `/${feature.id}.html`;
+                        }
                     };
-
                     navItem.appendChild(button);
-
-                    // Dropdown pour les sous-fonctionnalités de "automatisation"
-                    if (feature.id === "automatisation") {
+                    if (feature.id === "marketing") {
                         const dropdown = document.createElement("div");
                         dropdown.className = "dropdown-menu";
-
                         const dropdownTitle = document.createElement("h3");
                         dropdownTitle.className = "dropdown-title";
                         dropdownTitle.textContent = feature.title;
                         dropdown.appendChild(dropdownTitle);
-
                         subFeatures.forEach((sf) => {
                             const dropdownItem = document.createElement("div");
                             dropdownItem.className = "dropdown-item";
                             dropdownItem.textContent = sf.title;
-
-                            // MODIFIÉ : Redirige vers index.html avec feature et section
-                            dropdownItem.onclick = () => {
-                                window.location.href = `/index.html?feature=${feature.id}&section=${sf.id}`;
-                            };
-
+                            dropdownItem.onclick = () => (window.location.href = `/marketing/${sf.id}.html`);
                             dropdown.appendChild(dropdownItem);
                         });
-
                         navItem.appendChild(dropdown);
-
                         navItem.onmouseenter = () => dropdown.classList.add("show");
                         navItem.onmouseleave = () => dropdown.classList.remove("show");
                     }
-
                     navContainer.appendChild(navItem);
                 });
             }
-            // Dans fonctionnalites.html - Gestion du hash
-            function parseHash() {
-                const hash = window.location.hash.substring(1); // Retire le #
-
-                if (!hash) return {feature: "automatisation", section: null};
-
-                const parts = hash.split("-");
-                return {
-                    feature: parts[0] || "automatisation",
-                    section: parts[1] || null,
-                };
-            }
-
-            function init() {
-                const {feature, section} = parseHash();
-
-                if (featuresData[feature]) {
-                    activeFeature = feature;
-                }
-
-                renderNavigation();
-                renderContent();
-                setupIntersectionObserver();
-
-                if (section) {
-                    setTimeout(() => {
-                        scrollToSection(section);
-                    }, 500);
-                } else if (featuresData[activeFeature] && featuresData[activeFeature].subFeatures.length > 0) {
-                    setTimeout(() => {
-                        scrollToSection(featuresData[activeFeature].subFeatures[0].id);
-                    }, 100);
-                }
-            }
-
-            // Écouter les changements de hash
-            window.addEventListener("hashchange", function () {
-                const {feature, section} = parseHash();
-
-                if (feature !== activeFeature) {
-                    setActiveFeature(feature);
-                }
-
-                if (section) {
-                    setTimeout(() => {
-                        scrollToSection(section);
-                    }, 100);
-                }
-            });
-            // Génération de la sidebar
             function renderSidebar() {
                 const sidebarNav = document.getElementById("sidebarNav");
                 sidebarNav.innerHTML = "";
                 subFeatures.forEach((sf) => {
                     const btn = document.createElement("button");
-                    btn.className = "sidebar-item" + (sf.id === "formulaires-marketing" ? " active" : "");
+                    btn.className = "sidebar-item" + (sf.id === "maturation-leads" ? " active" : "");
                     btn.textContent = sf.title;
-                    btn.onclick = () => (window.location.href = `${sf.id}.html`);
+                    btn.onclick = () => (window.location.href = `/marketing/${sf.id}.html`);
                     sidebarNav.appendChild(btn);
                 });
             }
-            // Navigation (adaptable selon votre intégration SPA/routing)
             function goToOverview(featureId) {
-                if (featureId === "automatisation") {
-                    window.location.href = "index.html"; // ou la page d'accueil principale
+                if (featureId === "marketing") {
+                    window.location.href = "/marketing/maturation-leads.html";
                 } else {
-                    // Redirige vers la page correspondante
-                    alert(`Redirection vers la fonctionnalité "${featureId}"`);
+                    window.location.href = `/${featureId}.html`;
                 }
             }
-            function goToSubFeature(subFeatureId) {
-                if (subFeatureId === "gestion-leads") {
-                    window.scrollTo({top: 0, behavior: "smooth"});
-                } else {
-                    // Redirige vers la page détaillée correspondante ou affiche une alerte
-                    alert(`Page détaillée pour "${subFeatureId}" non implémentée.`);
-                }
-            }
-            // Initialisation
             renderNav();
             renderSidebar();
         </script>
