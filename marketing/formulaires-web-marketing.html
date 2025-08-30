@@ -561,12 +561,9 @@
                     const button = document.createElement("button");
                     button.className = "nav-button" + (feature.id === "marketing" ? " active" : "");
                     button.textContent = feature.title;
+                    // Redirige toujours vers la page index.html
                     button.onclick = () => {
-                        if (feature.id === "marketing") {
-                            window.location.href = "/marketing/formulaires-web-marketing.html";
-                        } else {
-                            window.location.href = `/${feature.id}.html`;
-                        }
+                        window.location.href = "/index.html";
                     };
                     navItem.appendChild(button);
                     if (feature.id === "marketing") {

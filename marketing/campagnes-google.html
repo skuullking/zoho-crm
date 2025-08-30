@@ -562,6 +562,7 @@
                     const button = document.createElement("button");
                     button.className = "nav-button" + (feature.id === "marketing" ? " active" : "");
                     button.textContent = feature.title;
+                    // Redirige toujours vers la page index.html
                     button.onclick = () => {
                         window.location.href = "/index.html";
                     };

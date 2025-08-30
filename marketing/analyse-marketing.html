@@ -526,8 +526,6 @@
             </div>
         </main>
         <script>
-            // NAVIGATION ET SIDEBAR - même logique que page principale
-            // Structure simplifiée pour cette vue
             const mainFeatures = [
                 {id: "automatisation", title: "Automatisation de la force de vente"},
                 {id: "processus", title: "Processus de vente"},
@@ -565,6 +563,7 @@
                     const button = document.createElement("button");
                     button.className = "nav-button" + (feature.id === "marketing" ? " active" : "");
                     button.textContent = feature.title;
+                    // Redirige toujours vers la page index.html
                     button.onclick = () => {
                         window.location.href = "/index.html";
                     };
@@ -614,3 +613,4 @@
         </script>
     </body>
 </html>
+

@@ -2,7 +2,7 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8" />
-        <title>Scanner de Cartes de Visite</title>
+        <title>Gestion des Leads</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:400,500,700&display=swap" />
         <style>
@@ -442,93 +442,34 @@
                 <div class="logo">
                     <img src="/image_video/yeddir-logo.svg" alt="Logo Yeddir" />
                 </div>
-                <nav class="nav-container" id="navContainer"></nav>
+                <nav class="nav-container" id="navContainer">
+                    <!-- La navigation principale sera générée par JS -->
+                </nav>
             </div>
         </header>
+
         <!-- Breadcrumb -->
         <nav class="breadcrumb" id="breadcrumb">
-            <span class="breadcrumb-item"
-                ><a class="breadcrumb-link" href="#" onclick="goToOverview('marketing')">Fonctionnalités</a></span
-            >
-            <span class="breadcrumb-separator">›</span>
-            <span class="breadcrumb-item"
-                ><a class="breadcrumb-link" href="#" onclick="goToOverview('marketing')"
-                    >Automatisation du marketing</a
-                ></span
-            >
-            <span class="breadcrumb-separator">›</span>
-            <span class="breadcrumb-item">Scanner cartes de visite</span>
+            <!-- ...breadcrumb dynamique... -->
         </nav>
+        <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <div class="sidebar-title" id="sidebarTitle">Automatisation du marketing</div>
+                <div class="sidebar-title" id="sidebarTitle">Titre Sidebar</div>
                 <div class="sidebar-subtitle">Navigation</div>
             </div>
             <nav class="sidebar-nav" id="sidebarNav"></nav>
         </aside>
+        <!-- Main Content -->
         <main class="main-content" id="mainContent">
             <div class="container">
-                <div class="detailed-hero">
-                    <h1 class="detailed-title">Scanner cartes de visite</h1>
-                    <p class="detailed-subtitle">
-                        Numérisez et intégrez instantanément les contacts de vos cartes de visite dans votre CRM
-                    </p>
-                </div>
-                <div class="detailed-content">
-                    <div class="detailed-section">
-                        <h3>Vue d'ensemble</h3>
-                        <p>
-                            Gagnez du temps en scannant vos cartes de visite lors de salons, rendez-vous ou événements,
-                            et enrichissez automatiquement votre base de données marketing.
-                        </p>
-                    </div>
-                    <div class="detailed-media">
-                        <img
-                            src="/image_video/marketing/scanner-cartes-visite.png"
-                            alt="Scanner cartes de visite"
-                            class="detailed-image"
-                        />
-                    </div>
-                    <div class="detailed-section">
-                        <h3>Fonctionnalités clés</h3>
-                        <div class="detailed-features-grid">
-                            <div class="detailed-feature-card">
-                                <h4>Reconnaissance intelligente</h4>
-                                <p>
-                                    Extraction automatique des informations (nom, email, téléphone, société, etc.) grâce
-                                    à l’OCR.
-                                </p>
-                            </div>
-                            <div class="detailed-feature-card">
-                                <h4>Création de contacts instantanée</h4>
-                                <p>Ajoutez les nouveaux contacts à votre CRM en un clic, sans ressaisie.</p>
-                            </div>
-                            <div class="detailed-feature-card">
-                                <h4>Gestion des doublons</h4>
-                                <p>Détection et fusion automatique des contacts déjà existants.</p>
-                            </div>
-                            <div class="detailed-feature-card">
-                                <h4>Intégration mobile</h4>
-                                <p>
-                                    Utilisez la fonctionnalité directement depuis l’application mobile lors de vos
-                                    déplacements.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="detailed-section">
-                        <h3>Bénéfices</h3>
-                        <div class="detailed-features-grid">
-                            <div class="detailed-feature-card"><p>✓ Gain de temps</p></div>
-                            <div class="detailed-feature-card"><p>✓ Moins d’erreurs de saisie</p></div>
-                            <div class="detailed-feature-card"><p>✓ Suivi commercial facilité</p></div>
-                            <div class="detailed-feature-card"><p>✓ Base de données enrichie</p></div>
-                        </div>
-                    </div>
-                </div>
+                <!-- ...contenu principal dynamique... -->
             </div>
         </main>
+
         <script>
+            // NAVIGATION ET SIDEBAR - même logique que page principale
+            // Structure simplifiée pour cette vue
             const mainFeatures = [
                 {id: "automatisation", title: "Automatisation de la force de vente"},
                 {id: "processus", title: "Processus de vente"},
@@ -544,33 +485,32 @@
                 {id: "plateforme", title: "Outils de développeur"},
             ];
             const subFeatures = [
-                {id: "segmentation-clients", title: "Segmentation des clients"},
-                {id: "maturation-leads", title: "Maturation des leads"},
-                {id: "formulaires-web-marketing", title: "Formulaires web marketing"},
-                {id: "scanner-cartes-visite", title: "Scanner cartes de visite"},
-                {id: "attribution-marketing", title: "Attribution marketing"},
-                {id: "campagnes-google", title: "Campagnes Google"},
-                {id: "gestion-evenements", title: "Gestion d'événements"},
-                {id: "campagnes-email", title: "Campagnes email"},
-                {id: "campagnes-sondages", title: "Campagnes sondages"},
-                {id: "sous-campagnes", title: "Sous-campagnes"},
-                {id: "analyse-marketing", title: "Analyse marketing"},
+                {id: "scripts-client", title: "Scripts client"},
+                {id: "api-rest", title: "API REST"},
+                {id: "fonctions-deluge", title: "Fonctions de Deluge"},
+                {id: "widgets", title: "Widgets"},
+                {id: "sdk-mobile-web", title: "SDK mobile et Web"},
+                {id: "edition-developpeur", title: "Édition pour développeur"},
+                {id: "sandbox", title: "Sandbox"},
             ];
+            // Génération de la nav principale
             function renderNav() {
                 const navContainer = document.getElementById("navContainer");
+                if (!navContainer) return; // Sécurité si l'élément n'existe pas
                 navContainer.innerHTML = "";
                 mainFeatures.forEach((feature) => {
                     const navItem = document.createElement("div");
                     navItem.className = "nav-item";
                     const button = document.createElement("button");
-                    button.className = "nav-button" + (feature.id === "marketing" ? " active" : "");
+                    // Pour gérer l'état actif dynamiquement, utiliser une variable globale
+                    button.className = "nav-button" + (feature.id === currentMainFeatureId ? " active" : "");
                     button.textContent = feature.title;
-                    // Redirige toujours vers la page index.html
-                    button.onclick = () => {
-                        window.location.href = "/index.html";
-                    };
+                    // Redirection vers l'overview de la fonctionnalité
+                    button.onclick = () => goToOverview(feature.id);
                     navItem.appendChild(button);
-                    if (feature.id === "marketing") {
+
+                    // Dropdown pour les sous-fonctionnalités de "automatisation"
+                    if (feature.id === "automatisation") {
                         const dropdown = document.createElement("div");
                         dropdown.className = "dropdown-menu";
                         const dropdownTitle = document.createElement("h3");
@@ -581,7 +521,8 @@
                             const dropdownItem = document.createElement("div");
                             dropdownItem.className = "dropdown-item";
                             dropdownItem.textContent = sf.title;
-                            dropdownItem.onclick = () => (window.location.href = `/marketing/${sf.id}.html`);
+                            // Gestion de la navigation vers la sous-fonctionnalité
+                            dropdownItem.onclick = () => goToSubFeature(sf.id);
                             dropdown.appendChild(dropdownItem);
                         });
                         navItem.appendChild(dropdown);
@@ -591,24 +532,51 @@
                     navContainer.appendChild(navItem);
                 });
             }
+
+            // Variable globale pour suivre la fonctionnalité principale active
+            let currentMainFeatureId = "automatisation";
+
+            // Fonction de navigation à adapter selon l'intégration SPA/routing
+            function goToOverview(featureId) {
+                currentMainFeatureId = featureId;
+                renderNav();
+                if (featureId === "automatisation") {
+                    window.location.href = "index.html";
+                } else {
+                    // Redirige vers la page correspondante (à adapter selon le projet)
+                    alert(`Redirection vers la fonctionnalité "${featureId}"`);
+                }
+            }
+            // Génération de la sidebar
             function renderSidebar() {
                 const sidebarNav = document.getElementById("sidebarNav");
                 sidebarNav.innerHTML = "";
                 subFeatures.forEach((sf) => {
                     const btn = document.createElement("button");
-                    btn.className = "sidebar-item" + (sf.id === "scanner-cartes-visite" ? " active" : "");
+                    btn.className = "sidebar-item" + (sf.id === "gestion-leads" ? " active" : "");
                     btn.textContent = sf.title;
-                    btn.onclick = () => (window.location.href = `/marketing/${sf.id}.html`);
+                    btn.onclick = () => goToSubFeature(sf.id);
                     sidebarNav.appendChild(btn);
                 });
             }
+            // Navigation (adaptable selon votre intégration SPA/routing)
             function goToOverview(featureId) {
-                if (featureId === "marketing") {
-                    window.location.href = "/marketing/scanner-cartes-visite.html";
+                if (featureId === "automatisation") {
+                    window.location.href = "index.html"; // ou la page d'accueil principale
                 } else {
-                    window.location.href = `/${featureId}.html`;
+                    // Redirige vers la page correspondante
+                    alert(`Redirection vers la fonctionnalité "${featureId}"`);
                 }
             }
+            function goToSubFeature(subFeatureId) {
+                if (subFeatureId === "gestion-leads") {
+                    window.scrollTo({top: 0, behavior: "smooth"});
+                } else {
+                    // Redirige vers la page détaillée correspondante ou affiche une alerte
+                    alert(`Page détaillée pour "${subFeatureId}" non implémentée.`);
+                }
+            }
+            // Initialisation
             renderNav();
             renderSidebar();
         </script>
