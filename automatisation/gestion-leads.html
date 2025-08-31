@@ -15,10 +15,12 @@
                 <div class="logo">
                     <img src="/image_video/yeddir-logo.svg" alt="Logo Yeddir" />
                 </div>
-                <nav class="nav-container" id="navContainer">
-                    <!-- La navigation principale sera générée par JS -->
-                </nav>
+                <!-- Bouton burger pour mobile -->
+                <button class="burger-menu" id="burgerMenu" aria-label="Ouvrir le menu">☰</button>
+                <nav class="nav-container" id="navContainer"></nav>
             </div>
+            <!-- Menu mobile (populé dynamiquement) -->
+            <div class="mobile-nav-menu" id="mobileNavMenu"></div>
         </header>
 
         <!-- Sidebar -->
@@ -141,6 +143,88 @@
                 {id: "regles-workflow", title: "Règles de workflow"},
             ];
 
+            // État de la sidebar
+            let sidebarOpen = true;
+            const isMobile = () => window.innerWidth <= 992;
+
+            // Ajout du menu mobile
+            const burgerMenu = document.getElementById("burgerMenu");
+            const mobileNavMenu = document.getElementById("mobileNavMenu");
+
+            burgerMenu.addEventListener("click", () => {
+                mobileNavMenu.classList.toggle("open");
+            });
+
+            // Fermer le menu mobile si clic en dehors
+            document.addEventListener("click", (e) => {
+                if (!mobileNavMenu.contains(e.target) && !burgerMenu.contains(e.target)) {
+                    mobileNavMenu.classList.remove("open");
+                }
+            });
+
+            // Toggle sidebar
+            function toggleSidebar() {
+                const sidebar = document.getElementById("sidebar");
+                const mainContent = document.getElementById("mainContent");
+                const overlay = document.getElementById("sidebarOverlay");
+                const toggleBtn = document.getElementById("sidebarToggle");
+
+                if (isMobile()) {
+                    // Mode mobile
+                    sidebarOpen = !sidebarOpen;
+                    sidebar.classList.toggle("sidebar-open", sidebarOpen);
+                    overlay.classList.toggle("active", sidebarOpen);
+                    document.body.style.overflow = sidebarOpen ? "hidden" : "";
+                } else {
+                    // Mode desktop
+                    sidebarOpen = !sidebarOpen;
+                    sidebar.classList.toggle("collapsed", !sidebarOpen);
+                    mainContent.classList.toggle("collapsed", !sidebarOpen);
+                }
+            }
+
+            // Fermer la sidebar sur mobile quand on clique sur l'overlay
+            function closeSidebarOnMobile() {
+                if (isMobile() && sidebarOpen) {
+                    toggleSidebar();
+                }
+            }
+
+            // Initialisation
+            function initSidebar() {
+                const sidebarToggle = document.getElementById("sidebarToggle");
+                const overlay = document.getElementById("sidebarOverlay");
+
+                sidebarToggle.addEventListener("click", toggleSidebar);
+                overlay.addEventListener("click", closeSidebarOnMobile);
+
+                // Gérer le redimensionnement de la fenêtre
+                window.addEventListener("resize", () => {
+                    const sidebar = document.getElementById("sidebar");
+                    const mainContent = document.getElementById("mainContent");
+                    const overlay = document.getElementById("sidebarOverlay");
+
+                    if (isMobile()) {
+                        // Mode mobile - fermer la sidebar et réinitialiser la position du bouton
+                        sidebar.classList.remove("collapsed");
+                        mainContent.classList.remove("collapsed");
+                        sidebar.classList.remove("sidebar-open");
+                        overlay.classList.remove("active");
+                        sidebarOpen = false;
+                        document.body.style.overflow = "";
+                    } else {
+                        // Mode desktop
+                        sidebar.classList.remove("sidebar-open");
+                        overlay.classList.remove("active");
+                        document.body.style.overflow = "";
+
+                        // Restaurer l'état de la sidebar pour desktop
+                        sidebar.classList.toggle("collapsed", !sidebarOpen);
+                        mainContent.classList.toggle("collapsed", !sidebarOpen);
+                    }
+                });
+            }
+
             function renderNav() {
                 const navContainer = document.getElementById("navContainer");
                 navContainer.innerHTML = "";
@@ -191,7 +275,175 @@
 
                     navContainer.appendChild(navItem);
                 });
+
+                // Ajout : menu mobile uniquement si mobile
+                if (window.innerWidth <= 992) {
+                    renderMobileNavigation();
+                } else {
+                    mobileNavMenu.innerHTML = "";
+                    mobileNavMenu.classList.remove("open");
+                }
             }
+
+            // Ajout du rendu du menu mobile
+            function renderMobileNavigation() {
+                // Ne rien faire si on est sur desktop
+                if (window.innerWidth > 992) {
+                    mobileNavMenu.innerHTML = "";
+                    mobileNavMenu.classList.remove("open");
+                    return;
+                }
+                mobileNavMenu.innerHTML = "";
+                mainFeatures.forEach((feature) => {
+                    const item = document.createElement("button");
+                    item.className = `mobile-nav-item ${feature.id === "aidevente" ? "active" : ""}`;
+                    item.textContent = feature.title;
+                    item.addEventListener("click", () => {
+                        if (feature.id === "aidevente") {
+                            window.location.href = "/aidevente/alertes-notifications.html";
+                        } else {
+                            window.location.href = `/${feature.id}.html`;
+                        }
+                        mobileNavMenu.classList.remove("open");
+                    });
+                    mobileNavMenu.appendChild(item);
+                });
+            }
+
+            // Dans fonctionnalites.html - Gestion du hash
+            function parseHash() {
+                const hash = window.location.hash.substring(1); // Retire le #
+
+                if (!hash) return {feature: "automatisation", section: null};
+
+                const parts = hash.split("-");
+                return {
+                    feature: parts[0] || "automatisation",
+                    section: parts[1] || null,
+                };
+            }
+
+            function init() {
+                const {feature, section} = parseHash();
+
+                if (featuresData[feature]) {
+                    activeFeature = feature;
+                }
+
+                renderNavigation();
+                renderContent();
+                setupIntersectionObserver();
+
+                if (section) {
+                    setTimeout(() => {
+                        scrollToSection(section);
+                    }, 500);
+                } else if (featuresData[activeFeature] && featuresData[activeFeature].subFeatures.length > 0) {
+                    setTimeout(() => {
+                        scrollToSection(featuresData[activeFeature].subFeatures[0].id);
+                    }, 100);
+                }
+            }
+
+            // Écouter les changements de hash
+            window.addEventListener("hashchange", function () {
+                const {feature, section} = parseHash();
+
+                if (feature !== activeFeature) {
+                    setActiveFeature(feature);
+                }
+
+                if (section) {
+                    setTimeout(() => {
+                        scrollToSection(section);
+                    }, 100);
+                }
+            });
+            function renderNav() {
+                const navContainer = document.getElementById("navContainer");
+                navContainer.innerHTML = "";
+
+                mainFeatures.forEach((feature) => {
+                    const navItem = document.createElement("div");
+                    navItem.className = "nav-item";
+
+                    const button = document.createElement("button");
+                    button.className = "nav-button" + (feature.id === "automatisation" ? " active" : "");
+                    button.textContent = feature.title;
+
+                    // MODIFIÉ : Redirige vers index.html avec le paramètre feature
+                    button.onclick = () => {
+                        window.location.href = `/index.html?feature=${feature.id}`;
+                    };
+
+                    navItem.appendChild(button);
+
+                    // Dropdown pour les sous-fonctionnalités de "automatisation"
+                    if (feature.id === "automatisation") {
+                        const dropdown = document.createElement("div");
+                        dropdown.className = "dropdown-menu";
+
+                        const dropdownTitle = document.createElement("h3");
+                        dropdownTitle.className = "dropdown-title";
+                        dropdownTitle.textContent = feature.title;
+                        dropdown.appendChild(dropdownTitle);
+
+                        subFeatures.forEach((sf) => {
+                            const dropdownItem = document.createElement("div");
+                            dropdownItem.className = "dropdown-item";
+                            dropdownItem.textContent = sf.title;
+
+                            // MODIFIÉ : Redirige vers index.html avec feature et section
+                            dropdownItem.onclick = () => {
+                                window.location.href = `/index.html?feature=${feature.id}&section=${sf.id}`;
+                            };
+
+                            dropdown.appendChild(dropdownItem);
+                        });
+
+                        navItem.appendChild(dropdown);
+
+                        navItem.onmouseenter = () => dropdown.classList.add("show");
+                        navItem.onmouseleave = () => dropdown.classList.remove("show");
+                    }
+
+                    navContainer.appendChild(navItem);
+                });
+
+                // Ajout : menu mobile uniquement si mobile
+                if (window.innerWidth <= 992) {
+                    renderMobileNavigation();
+                } else {
+                    mobileNavMenu.innerHTML = "";
+                    mobileNavMenu.classList.remove("open");
+                }
+            }
+
+            // Ajout du rendu du menu mobile
+            function renderMobileNavigation() {
+                // Ne rien faire si on est sur desktop
+                if (window.innerWidth > 992) {
+                    mobileNavMenu.innerHTML = "";
+                    mobileNavMenu.classList.remove("open");
+                    return;
+                }
+                mobileNavMenu.innerHTML = "";
+                mainFeatures.forEach((feature) => {
+                    const item = document.createElement("button");
+                    item.className = `mobile-nav-item ${feature.id === "aidevente" ? "active" : ""}`;
+                    item.textContent = feature.title;
+                    item.addEventListener("click", () => {
+                        if (feature.id === "aidevente") {
+                            window.location.href = "/aidevente/alertes-notifications.html";
+                        } else {
+                            window.location.href = `/${feature.id}.html`;
+                        }
+                        mobileNavMenu.classList.remove("open");
+                    });
+                    mobileNavMenu.appendChild(item);
+                });
+            }
+
             // Dans fonctionnalites.html - Gestion du hash
             function parseHash() {
                 const hash = window.location.hash.substring(1); // Retire le #
@@ -266,6 +518,11 @@
             renderNav();
             renderSidebar();
             initSidebar();
+
+            // Ajout : re-render navigation au resize pour éviter le bug lors du redimensionnement
+            window.addEventListener("resize", () => {
+                renderNav();
+            });
         </script>
     </body>
 </html>

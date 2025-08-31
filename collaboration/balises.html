@@ -14,10 +14,12 @@
                 <div class="logo">
                     <img src="/image_video/yeddir-logo.svg" alt="Logo Yeddir" />
                 </div>
-                <nav class="nav-container" id="navContainer">
-                    <!-- La navigation principale sera générée par JS -->
-                </nav>
+                <!-- Bouton burger pour mobile -->
+                <button class="burger-menu" id="burgerMenu" aria-label="Ouvrir le menu">☰</button>
+                <nav class="nav-container" id="navContainer"></nav>
             </div>
+            <!-- Menu mobile (populé dynamiquement) -->
+            <div class="mobile-nav-menu" id="mobileNavMenu"></div>
         </header>
 
         <!-- Sidebar -->
@@ -133,6 +135,21 @@
             let sidebarOpen = true;
             const isMobile = () => window.innerWidth <= 992;
 
+            // Ajout du menu mobile
+            const burgerMenu = document.getElementById("burgerMenu");
+            const mobileNavMenu = document.getElementById("mobileNavMenu");
+
+            burgerMenu.addEventListener("click", () => {
+                mobileNavMenu.classList.toggle("open");
+            });
+
+            // Fermer le menu mobile si clic en dehors
+            document.addEventListener("click", (e) => {
+                if (!mobileNavMenu.contains(e.target) && !burgerMenu.contains(e.target)) {
+                    mobileNavMenu.classList.remove("open");
+                }
+            });
+
             // Toggle sidebar
             function toggleSidebar() {
                 const sidebar = document.getElementById("sidebar");
@@ -233,6 +250,39 @@
                     }
                     navContainer.appendChild(navItem);
                 });
+
+                // Ajout : menu mobile uniquement si mobile
+                if (window.innerWidth <= 992) {
+                    renderMobileNavigation();
+                } else {
+                    mobileNavMenu.innerHTML = "";
+                    mobileNavMenu.classList.remove("open");
+                }
+            }
+
+            // Ajout du rendu du menu mobile
+            function renderMobileNavigation() {
+                // Ne rien faire si on est sur desktop
+                if (window.innerWidth > 992) {
+                    mobileNavMenu.innerHTML = "";
+                    mobileNavMenu.classList.remove("open");
+                    return;
+                }
+                mobileNavMenu.innerHTML = "";
+                mainFeatures.forEach((feature) => {
+                    const item = document.createElement("button");
+                    item.className = `mobile-nav-item ${feature.id === "aidevente" ? "active" : ""}`;
+                    item.textContent = feature.title;
+                    item.addEventListener("click", () => {
+                        if (feature.id === "aidevente") {
+                            window.location.href = "/aidevente/alertes-notifications.html";
+                        } else {
+                            window.location.href = `/${feature.id}.html`;
+                        }
+                        mobileNavMenu.classList.remove("open");
+                    });
+                    mobileNavMenu.appendChild(item);
+                });
             }
 
             // Variable globale pour suivre la fonctionnalité principale active
@@ -282,6 +332,11 @@
             renderNav();
             renderSidebar();
             initSidebar();
+
+            // Ajout : re-render navigation au resize pour éviter le bug lors du redimensionnement
+            window.addEventListener("resize", () => {
+                renderNav();
+            });
         </script>
     </body>
 </html>
