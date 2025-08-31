@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
+        <title>{{PAGE_TITLE}} - Yeddir</title>
         <meta charset="UTF-8" />
-        <title>Zoho CRM - Base</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:400,500,700&display=swap" />
         <link rel="stylesheet" href="../style.css" />
@@ -14,278 +14,470 @@
                 <div class="logo">
                     <img src="/image_video/yeddir-logo.svg" alt="Logo Yeddir" />
                 </div>
-                <!-- Bouton burger pour mobile -->
                 <button class="burger-menu" id="burgerMenu" aria-label="Ouvrir le menu">☰</button>
                 <nav class="nav-container" id="navContainer"></nav>
             </div>
-            <!-- Menu mobile (populé dynamiquement) -->
             <div class="mobile-nav-menu" id="mobileNavMenu"></div>
         </header>
 
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <div class="sidebar-title" id="sidebarTitle">Titre Sidebar</div>
+                <div class="sidebar-title" id="sidebarTitle">{{SIDEBAR_TITLE}}</div>
                 <div class="sidebar-subtitle">Navigation</div>
             </div>
             <nav class="sidebar-nav" id="sidebarNav"></nav>
         </aside>
 
+        <!-- Sidebar Toggle Button -->
         <button class="sidebar-toggle" id="sidebarToggle">
-            <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-            >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="15,18 9,12 15,6"></polyline>
             </svg>
         </button>
 
         <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
+        <!-- Main Content -->
         <main class="main-content" id="mainContent">
             <div class="container">
-                <!-- ...contenu principal dynamique... -->
+                <!-- Hero Section -->
+                <div class="detailed-hero">
+                    <h1 class="detailed-title">{{MAIN_TITLE}}</h1>
+                    <p class="detailed-subtitle">{{MAIN_SUBTITLE}}</p>
+                </div>
+
+                <!-- Dynamic Content Area -->
+                <div class="detailed-content" id="dynamicContent">
+                    <!-- Le contenu sera injecté ici via JavaScript -->
+                </div>
             </div>
         </main>
 
         <script>
-            // NAVIGATION ET SIDEBAR - même logique que page principale
-            // Structure simplifiée pour cette vue
-            const mainFeatures = [
-                {id: "automatisation", title: "Automatisation de la force de vente"},
-                {id: "processus", title: "Processus de vente"},
-                {id: "omnicanal", title: "Omnicanal"},
-                {id: "analyses", title: "Analyse des ventes"},
-                {id: "aidevente", title: "Aide à la vente"},
-                {id: "performances", title: "Performances de vente"},
-                {id: "ZIA", title: "ZIA"},
-                {id: "personnalisation", title: "Personnalisation"},
-                {id: "marketing", title: "Automatisation du marketing"},
-                {id: "collaboration", title: "Collaboration en équipe"},
-                {id: "mobile", title: "Applications mobiles"},
-                {id: "plateforme", title: "Outils de développeur"},
-            ];
-            const subFeatures = [
-                {id: "flux", title: "flux"},
-                {id: "chat", title: "chat intégré"},
-                {id: "notes", title: "notes"},
-                {id: "balises", title: "balises"},
-                {id: "groupes", title: "groupes"},
-                {id: "gestion-projets", title: "gestion de projets"},
-            ];
-
-            // État de la sidebar
-            let sidebarOpen = true;
-            const isMobile = () => window.innerWidth <= 992;
-
-            // Ajout du menu mobile
-            const burgerMenu = document.getElementById("burgerMenu");
-            const mobileNavMenu = document.getElementById("mobileNavMenu");
-
-            burgerMenu.addEventListener("click", () => {
-                mobileNavMenu.classList.toggle("open");
-            });
-
-            // Fermer le menu mobile si clic en dehors
-            document.addEventListener("click", (e) => {
-                if (!mobileNavMenu.contains(e.target) && !burgerMenu.contains(e.target)) {
-                    mobileNavMenu.classList.remove("open");
+            // ======================
+            // CONFIGURATION
+            // ======================
+            const CONFIG = {
+                // Configuration des features principales
+                mainFeatures: [
+                    {id: "automatisation", title: "Automatisation de la force de vente"},
+                    {id: "processus", title: "Processus de vente"},
+                    {id: "omnicanal", title: "Omnicanal"},
+                    {id: "analyses", title: "Analyse des ventes"},
+                    {id: "aidevente", title: "Aide à la vente"},
+                    {id: "performances", title: "Performances de vente"},
+                    {id: "ZIA", title: "ZIA"},
+                    {id: "personnalisation", title: "Personnalisation"},
+                    {id: "marketing", title: "Automatisation du marketing"},
+                    {id: "collaboration", title: "Collaboration en équipe"},
+                    {id: "mobile", title: "Applications mobiles"},
+                    {id: "plateforme", title: "Outils de développeur"},
+                ],
+                
+                // Configuration des sous-features
+                subFeatures: [
+                    {id: "finance", title: "Finance"},
+                    {id: "cpq", title: "CPQ (Configure/Price/Quote)"},
+                    {id: "bibliotheque-documents", title: "Bibliothèque de documents"},
+                    {id: "portails", title: "Portails"},
+                    {id: "assistants", title: "Assistants"},
+                    {id: "calendrier", title: "Calendrier"},
+                    {id: "salesinbox", title: "SalesInbox"},
+                    {id: "zoho-meeting", title: "Intégration de Zoho Meeting"},
+                    {id: "google-office", title: "Google Workspace et Office 365"},
+                    {id: "alertes-notifications", title: "Alertes et notifications"},
+                    {id: "mobile-aide", title: "Mobile"},
+                ],
+                
+                // Configuration de la page actuelle (à personnaliser)
+                currentPage: {
+                    feature: "aidevente",
+                    subFeature: "alertes-notifications",
+                    title: "Alertes et notifications",
+                    subtitle: "Système d'alertes intelligent multi-niveau",
+                    sidebarTitle: "Aide à la vente"
                 }
-            });
+            };
 
-            // Toggle sidebar
-            function toggleSidebar() {
-                const sidebar = document.getElementById("sidebar");
-                const mainContent = document.getElementById("mainContent");
-                const overlay = document.getElementById("sidebarOverlay");
-                const toggleBtn = document.getElementById("sidebarToggle");
-
-                if (isMobile()) {
-                    // Mode mobile
-                    sidebarOpen = !sidebarOpen;
-                    sidebar.classList.toggle("sidebar-open", sidebarOpen);
-                    overlay.classList.toggle("active", sidebarOpen);
-                    document.body.style.overflow = sidebarOpen ? "hidden" : "";
-                } else {
-                    // Mode desktop
-                    sidebarOpen = !sidebarOpen;
-                    sidebar.classList.toggle("collapsed", !sidebarOpen);
-                    mainContent.classList.toggle("collapsed", !sidebarOpen);
+            // ======================
+            // GESTION DE L'ÉTAT
+            // ======================
+            class AppState {
+                constructor() {
+                    this.sidebarOpen = true;
+                    this.isMobile = () => window.innerWidth <= 992;
                 }
-            }
 
-            // Fermer la sidebar sur mobile quand on clique sur l'overlay
-            function closeSidebarOnMobile() {
-                if (isMobile() && sidebarOpen) {
-                    toggleSidebar();
-                }
-            }
-
-            // Initialisation
-            function initSidebar() {
-                const sidebarToggle = document.getElementById("sidebarToggle");
-                const overlay = document.getElementById("sidebarOverlay");
-
-                sidebarToggle.addEventListener("click", toggleSidebar);
-                overlay.addEventListener("click", closeSidebarOnMobile);
-
-                // Gérer le redimensionnement de la fenêtre
-                window.addEventListener("resize", () => {
+                toggleSidebar() {
                     const sidebar = document.getElementById("sidebar");
                     const mainContent = document.getElementById("mainContent");
                     const overlay = document.getElementById("sidebarOverlay");
 
-                    if (isMobile()) {
-                        // Mode mobile - fermer la sidebar et réinitialiser la position du bouton
+                    if (this.isMobile()) {
+                        this.sidebarOpen = !this.sidebarOpen;
+                        sidebar.classList.toggle("sidebar-open", this.sidebarOpen);
+                        overlay.classList.toggle("active", this.sidebarOpen);
+                        document.body.style.overflow = this.sidebarOpen ? "hidden" : "";
+                    } else {
+                        this.sidebarOpen = !this.sidebarOpen;
+                        sidebar.classList.toggle("collapsed", !this.sidebarOpen);
+                        mainContent.classList.toggle("collapsed", !this.sidebarOpen);
+                    }
+                }
+
+                closeSidebarOnMobile() {
+                    if (this.isMobile() && this.sidebarOpen) {
+                        this.toggleSidebar();
+                    }
+                }
+
+                handleResize() {
+                    const sidebar = document.getElementById("sidebar");
+                    const mainContent = document.getElementById("mainContent");
+                    const overlay = document.getElementById("sidebarOverlay");
+
+                    if (this.isMobile()) {
                         sidebar.classList.remove("collapsed");
                         mainContent.classList.remove("collapsed");
                         sidebar.classList.remove("sidebar-open");
                         overlay.classList.remove("active");
-                        sidebarOpen = false;
+                        this.sidebarOpen = false;
                         document.body.style.overflow = "";
                     } else {
-                        // Mode desktop
                         sidebar.classList.remove("sidebar-open");
                         overlay.classList.remove("active");
                         document.body.style.overflow = "";
-
-                        // Restaurer l'état de la sidebar pour desktop
-                        sidebar.classList.toggle("collapsed", !sidebarOpen);
-                        mainContent.classList.toggle("collapsed", !sidebarOpen);
+                        sidebar.classList.toggle("collapsed", !this.sidebarOpen);
+                        mainContent.classList.toggle("collapsed", !this.sidebarOpen);
                     }
-                });
+                }
             }
 
-            function renderNav() {
-                const navContainer = document.getElementById("navContainer");
-                if (!navContainer) return; // Sécurité si l'élément n'existe pas
-                navContainer.innerHTML = "";
-                mainFeatures.forEach((feature) => {
+            // ======================
+            // GESTIONNAIRE DE NAVIGATION
+            // ======================
+            class NavigationManager {
+                constructor(config, appState) {
+                    this.config = config;
+                    this.appState = appState;
+                }
+
+                renderMainNavigation() {
+                    const navContainer = document.getElementById("navContainer");
+                    navContainer.innerHTML = "";
+                    
+                    this.config.mainFeatures.forEach((feature) => {
+                        const navItem = this.createNavItem(feature);
+                        navContainer.appendChild(navItem);
+                    });
+
+                    if (this.appState.isMobile()) {
+                        this.renderMobileNavigation();
+                    } else {
+                        document.getElementById("mobileNavMenu").innerHTML = "";
+                        document.getElementById("mobileNavMenu").classList.remove("open");
+                    }
+                }
+
+                createNavItem(feature) {
                     const navItem = document.createElement("div");
                     navItem.className = "nav-item";
+                    
                     const button = document.createElement("button");
-                    // Pour gérer l'état actif dynamiquement, utiliser une variable globale
-                    button.className = "nav-button" + (feature.id === currentMainFeatureId ? " active" : "");
+                    button.className = "nav-button" + (feature.id === this.config.currentPage.feature ? " active" : "");
                     button.textContent = feature.title;
-                    // Redirection vers l'overview de la fonctionnalité
-                    button.onclick = () => goToOverview(feature.id);
+                    button.onclick = () => window.location.href = "/index.html";
+                    
                     navItem.appendChild(button);
 
-                    // Dropdown pour les sous-fonctionnalités de "automatisation"
-                    if (feature.id === "automatisation") {
-                        const dropdown = document.createElement("div");
-                        dropdown.className = "dropdown-menu";
-                        const dropdownTitle = document.createElement("h3");
-                        dropdownTitle.className = "dropdown-title";
-                        dropdownTitle.textContent = feature.title;
-                        dropdown.appendChild(dropdownTitle);
-                        subFeatures.forEach((sf) => {
-                            const dropdownItem = document.createElement("div");
-                            dropdownItem.className = "dropdown-item";
-                            dropdownItem.textContent = sf.title;
-                            // Gestion de la navigation vers la sous-fonctionnalité
-                            dropdownItem.onclick = () => goToSubFeature(sf.id);
-                            dropdown.appendChild(dropdownItem);
-                        });
+                    // Dropdown pour la feature active
+                    if (feature.id === this.config.currentPage.feature) {
+                        const dropdown = this.createDropdown(feature);
                         navItem.appendChild(dropdown);
                         navItem.onmouseenter = () => dropdown.classList.add("show");
                         navItem.onmouseleave = () => dropdown.classList.remove("show");
                     }
-                    navContainer.appendChild(navItem);
-                });
 
-                // Ajout : menu mobile uniquement si mobile
-                if (window.innerWidth <= 992) {
-                    renderMobileNavigation();
-                } else {
-                    mobileNavMenu.innerHTML = "";
-                    mobileNavMenu.classList.remove("open");
+                    return navItem;
                 }
-            }
 
-            // Ajout du rendu du menu mobile
-            function renderMobileNavigation() {
-                // Ne rien faire si on est sur desktop
-                if (window.innerWidth > 992) {
-                    mobileNavMenu.innerHTML = "";
-                    mobileNavMenu.classList.remove("open");
-                    return;
-                }
-                mobileNavMenu.innerHTML = "";
-                mainFeatures.forEach((feature) => {
-                    const item = document.createElement("button");
-                    item.className = `mobile-nav-item ${feature.id === "aidevente" ? "active" : ""}`;
-                    item.textContent = feature.title;
-                    item.addEventListener("click", () => {
-                        if (feature.id === "aidevente") {
-                            window.location.href = "/aidevente/alertes-notifications.html";
-                        } else {
-                            window.location.href = `/${feature.id}.html`;
-                        }
-                        mobileNavMenu.classList.remove("open");
+                createDropdown(feature) {
+                    const dropdown = document.createElement("div");
+                    dropdown.className = "dropdown-menu";
+                    
+                    const dropdownTitle = document.createElement("h3");
+                    dropdownTitle.className = "dropdown-title";
+                    dropdownTitle.textContent = feature.title;
+                    dropdown.appendChild(dropdownTitle);
+
+                    this.config.subFeatures.forEach((sf) => {
+                        const dropdownItem = document.createElement("div");
+                        dropdownItem.className = "dropdown-item";
+                        dropdownItem.textContent = sf.title;
+                        dropdownItem.onclick = () => window.location.href = `/aidevente/${sf.id}.html`;
+                        dropdown.appendChild(dropdownItem);
                     });
-                    mobileNavMenu.appendChild(item);
-                });
-            }
 
-            // Variable globale pour suivre la fonctionnalité principale active
-            let currentMainFeatureId = "automatisation";
+                    return dropdown;
+                }
 
-            // Fonction de navigation à adapter selon l'intégration SPA/routing
-            function goToOverview(featureId) {
-                currentMainFeatureId = featureId;
-                renderNav();
-                if (featureId === "automatisation") {
-                    window.location.href = "index.html";
-                } else {
-                    // Redirige vers la page correspondante (à adapter selon le projet)
-                    alert(`Redirection vers la fonctionnalité "${featureId}"`);
+                renderMobileNavigation() {
+                    if (window.innerWidth > 992) {
+                        document.getElementById("mobileNavMenu").innerHTML = "";
+                        document.getElementById("mobileNavMenu").classList.remove("open");
+                        return;
+                    }
+
+                    const mobileNavMenu = document.getElementById("mobileNavMenu");
+                    mobileNavMenu.innerHTML = "";
+                    
+                    this.config.mainFeatures.forEach((feature) => {
+                        const item = document.createElement("button");
+                        item.className = `mobile-nav-item ${feature.id === this.config.currentPage.feature ? "active" : ""}`;
+                        item.textContent = feature.title;
+                        item.addEventListener("click", () => {
+                            window.location.href = "/index.html";
+                            mobileNavMenu.classList.remove("open");
+                        });
+                        mobileNavMenu.appendChild(item);
+                    });
                 }
-            }
-            // Génération de la sidebar
-            function renderSidebar() {
-                const sidebarNav = document.getElementById("sidebarNav");
-                sidebarNav.innerHTML = "";
-                subFeatures.forEach((sf) => {
-                    const btn = document.createElement("button");
-                    btn.className = "sidebar-item" + (sf.id === "gestion-leads" ? " active" : "");
-                    btn.textContent = sf.title;
-                    btn.onclick = () => goToSubFeature(sf.id);
-                    sidebarNav.appendChild(btn);
-                });
-            }
-            // Navigation (adaptable selon votre intégration SPA/routing)
-            function goToOverview(featureId) {
-                if (featureId === "automatisation") {
-                    window.location.href = "index.html"; // ou la page d'accueil principale
-                } else {
-                    // Redirige vers la page correspondante
-                    alert(`Redirection vers la fonctionnalité "${featureId}"`);
-                }
-            }
-            function goToSubFeature(subFeatureId) {
-                if (subFeatureId === "gestion-leads") {
-                    window.scrollTo({top: 0, behavior: "smooth"});
-                } else {
-                    // Redirige vers la page détaillée correspondante ou affiche une alerte
-                    alert(`Page détaillée pour "${subFeatureId}" non implémentée.`);
+
+                renderSidebar() {
+                    const sidebarNav = document.getElementById("sidebarNav");
+                    sidebarNav.innerHTML = "";
+                    
+                    this.config.subFeatures.forEach((sf) => {
+                        const btn = document.createElement("button");
+                        btn.className = "sidebar-item" + (sf.id === this.config.currentPage.subFeature ? " active" : "");
+                        btn.textContent = sf.title;
+                        btn.onclick = () => window.location.href = `/aidevente/${sf.id}.html`;
+                        sidebarNav.appendChild(btn);
+                    });
                 }
             }
 
-            renderNav();
-            renderSidebar();
-            initSidebar();
+            // ======================
+            // GESTIONNAIRE DE CONTENU
+            // ======================
+            class ContentManager {
+                constructor(config) {
+                    this.config = config;
+                }
 
-            // Ajout : re-render navigation au resize pour éviter le bug lors du redimensionnement
-            window.addEventListener("resize", () => {
-                renderNav();
+                renderPageContent() {
+                    // Mettre à jour les placeholders dans le HTML
+                    document.title = `${this.config.currentPage.title} - Yeddir`;
+                    document.querySelector(".detailed-title").textContent = this.config.currentPage.title;
+                    document.querySelector(".detailed-subtitle").textContent = this.config.currentPage.subtitle;
+                    document.getElementById("sidebarTitle").textContent = this.config.currentPage.sidebarTitle;
+
+                    // Contenu spécifique à la page (à personnaliser)
+                    this.renderDynamicContent();
+                }
+
+                renderDynamicContent() {
+                    const dynamicContent = document.getElementById("dynamicContent");
+                    
+                    // Exemple de contenu pour la page alertes-notifications
+                    const content = `
+                        <div class="detailed-section">
+                            <h3>Vue d'ensemble</h3>
+                            <p>
+                                Restez informé des événements critiques avec un système de notifications intelligent qui
+                                s'adapte à vos préférences et priorités.
+                            </p>
+                        </div>
+                        
+                        <div class="detailed-media">
+                            <img
+                                src="/image_video/aide-a-la-vente/alertes-notifications.png"
+                                alt="${this.config.currentPage.title}"
+                                class="detailed-image"
+                            />
+                        </div>
+                        
+                        <div class="detailed-section">
+                            <h3>Fonctionnalités clés</h3>
+                            <div class="detailed-features-grid">
+                                <div class="detailed-feature-card">
+                                    <h4>Alertes intelligentes</h4>
+                                    <p>Notifications contextuelles basées sur l'importance, l'urgence et les préférences utilisateur.</p>
+                                </div>
+                                <div class="detailed-feature-card">
+                                    <h4>Personnalisation avancée</h4>
+                                    <p>Configuration fine des types d'alertes, canaux et fréquences selon les rôles.</p>
+                                </div>
+                                <div class="detailed-feature-card">
+                                    <h4>Escalade automatique</h4>
+                                    <p>Remontée hiérarchique selon les niveaux d'urgence et délais de réponse.</p>
+                                </div>
+                                <div class="detailed-feature-card">
+                                    <h4>Suivi des notifications</h4>
+                                    <p>Historique complet avec accusés de réception et actions entreprises.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="detailed-section">
+                            <h3>Bénéfices</h3>
+                            <div class="detailed-features-grid">
+                                <div class="detailed-feature-card"><p>✓ Réactivité maximale</p></div>
+                                <div class="detailed-feature-card"><p>✓ Priorisation intelligente</p></div>
+                                <div class="detailed-feature-card"><p>✓ Réduction des oublis</p></div>
+                                <div class="detailed-feature-card"><p>✓ Traçabilité complète</p></div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    dynamicContent.innerHTML = content;
+                }
+            }
+
+            // ======================
+            // GESTIONNAIRE D'ÉVÉNEMENTS
+            // ======================
+            class EventManager {
+                constructor(appState, navigationManager) {
+                    this.appState = appState;
+                    this.navigationManager = navigationManager;
+                }
+
+                init() {
+                    this.setupSidebarEvents();
+                    this.setupMobileMenuEvents();
+                    this.setupResizeEvents();
+                }
+
+                setupSidebarEvents() {
+                    const sidebarToggle = document.getElementById("sidebarToggle");
+                    const overlay = document.getElementById("sidebarOverlay");
+
+                    sidebarToggle.addEventListener("click", () => this.appState.toggleSidebar());
+                    overlay.addEventListener("click", () => this.appState.closeSidebarOnMobile());
+                }
+
+                setupMobileMenuEvents() {
+                    const burgerMenu = document.getElementById("burgerMenu");
+                    const mobileNavMenu = document.getElementById("mobileNavMenu");
+
+                    burgerMenu.addEventListener("click", () => {
+                        mobileNavMenu.classList.toggle("open");
+                    });
+
+                    // Fermer le menu mobile si clic en dehors
+                    document.addEventListener("click", (e) => {
+                        if (!mobileNavMenu.contains(e.target) && !burgerMenu.contains(e.target)) {
+                            mobileNavMenu.classList.remove("open");
+                        }
+                    });
+                }
+
+                setupResizeEvents() {
+                    window.addEventListener("resize", () => {
+                        this.appState.handleResize();
+                        this.navigationManager.renderMainNavigation();
+                    });
+                }
+            }
+
+            // ======================
+            // APPLICATION PRINCIPALE
+            // ======================
+            class App {
+                constructor() {
+                    this.appState = new AppState();
+                    this.navigationManager = new NavigationManager(CONFIG, this.appState);
+                    this.contentManager = new ContentManager(CONFIG);
+                    this.eventManager = new EventManager(this.appState, this.navigationManager);
+                }
+
+                init() {
+                    // Initialiser tous les composants
+                    this.navigationManager.renderMainNavigation();
+                    this.navigationManager.renderSidebar();
+                    this.contentManager.renderPageContent();
+                    this.eventManager.init();
+                }
+
+                // Méthodes utilitaires pour la navigation
+                goToOverview(featureId) {
+                    window.location.href = "/index.html";
+                }
+
+                goToSubFeature(subFeatureId) {
+                    window.location.href = `/aidevente/${subFeatureId}.html`;
+                }
+            }
+
+            // ======================
+            // UTILITAIRES
+            // ======================
+            const Utils = {
+                // Fonction pour créer facilement des éléments
+                createElement(tag, className = '', textContent = '') {
+                    const element = document.createElement(tag);
+                    if (className) element.className = className;
+                    if (textContent) element.textContent = textContent;
+                    return element;
+                },
+
+                // Fonction pour débouncer les événements
+                debounce(func, wait) {
+                    let timeout;
+                    return function executedFunction(...args) {
+                        const later = () => {
+                            clearTimeout(timeout);
+                            func(...args);
+                        };
+                        clearTimeout(timeout);
+                        timeout = setTimeout(later, wait);
+                    };
+                },
+
+                // Fonction pour adapter la configuration à une nouvelle page
+                adaptConfigForPage(newPageConfig) {
+                    return {
+                        ...CONFIG,
+                        currentPage: {
+                            ...CONFIG.currentPage,
+                            ...newPageConfig
+                        }
+                    };
+                }
+            };
+
+            // ======================
+            // INITIALISATION
+            // ======================
+            document.addEventListener('DOMContentLoaded', () => {
+                const app = new App();
+                app.init();
+                
+                // Exposer l'app globalement pour le debugging
+                window.YeddirApp = app;
             });
+
+            // ======================
+            // EXEMPLE D'UTILISATION POUR UNE NOUVELLE PAGE
+            // ======================
+            /*
+            Pour créer une nouvelle page, il suffit de :
+            
+            1. Modifier la configuration dans CONFIG.currentPage :
+            CONFIG.currentPage = {
+                feature: "aidevente",
+                subFeature: "calendrier",
+                title: "Calendrier",
+                subtitle: "Gestion intelligente des rendez-vous",
+                sidebarTitle: "Aide à la vente"
+            };
+
+            2. Personnaliser le contenu dans ContentManager.renderDynamicContent()
+
+            3. Optionnel : Ajouter des gestionnaires d'événements spécifiques dans EventManager
+            */
         </script>
     </body>
 </html>
