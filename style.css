@@ -66,7 +66,7 @@
             }
 
             .sidebar.collapsed ~ .sidebar-toggle {
-                left: 50px;
+                left: 0px;
             }
 
             .sidebar.collapsed ~ .sidebar-toggle svg {
@@ -189,11 +189,11 @@
 
             /* État rétracté pour desktop */
             .sidebar.collapsed {
-                width: 50px;
+                width: 0px;
             }
 
             .sidebar.collapsed .sidebar-header {
-                padding: 16px 8px;
+                display: none;
             }
 
             .sidebar.collapsed .sidebar-title,
@@ -202,12 +202,7 @@
             }
 
             .sidebar.collapsed .sidebar-item {
-                padding: 12px 8px;
-                text-align: center;
-                font-size: 12px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
+                display: none;
             }
 
             .sidebar-header {
@@ -259,7 +254,7 @@
             }
 
             .main-content.collapsed {
-                margin-left: 50px;
+                margin-left: 0px;
             }
             /* Hero Section */
             .detailed-hero {
@@ -405,10 +400,10 @@
                     width: 140px;
                 }
                 .sidebar.collapsed {
-                    width: 50px;
+                    width: 0px;
                 }
                 .main-content.collapsed {
-                    margin-left: 50px;
+                    margin-left: 0px;
                 }
                 
                 .sidebar-toggle {
@@ -416,7 +411,7 @@
                 }
                 
                 .sidebar.collapsed ~ .sidebar-toggle {
-                    left: 50px;
+                    left: 0px;
                 }
             }
             @media (min-width: 993px) {

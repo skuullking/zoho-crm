@@ -223,18 +223,17 @@
                     navItem.className = "nav-item";
 
                     const button = document.createElement("button");
-                    button.className = "nav-button" + (feature.id === "automatisation" ? " active" : "");
+                    button.className = "nav-button" + (feature.id === "analyses" ? " active" : "");
                     button.textContent = feature.title;
 
-                    // MODIFIÉ : Redirige vers index.html avec le paramètre feature
                     button.onclick = () => {
-                        window.location.href = `/index.html?feature=${feature.id}`;
+                        window.location.href = "/index.html";
                     };
 
                     navItem.appendChild(button);
 
-                    // Dropdown pour les sous-fonctionnalités de "automatisation"
-                    if (feature.id === "automatisation") {
+                    // Dropdown pour les sous-fonctionnalités d'"analyses"
+                    if (feature.id === "analyses") {
                         const dropdown = document.createElement("div");
                         dropdown.className = "dropdown-menu";
 
@@ -248,9 +247,8 @@
                             dropdownItem.className = "dropdown-item";
                             dropdownItem.textContent = sf.title;
 
-                            // MODIFIÉ : Redirige vers index.html avec feature et section
                             dropdownItem.onclick = () => {
-                                window.location.href = `/index.html?feature=${feature.id}&section=${sf.id}`;
+                                window.location.href = `/analyses/${sf.id}.html`;
                             };
 
                             dropdown.appendChild(dropdownItem);
@@ -285,14 +283,10 @@
                 mobileNavMenu.innerHTML = "";
                 mainFeatures.forEach((feature) => {
                     const item = document.createElement("button");
-                    item.className = `mobile-nav-item ${feature.id === "aidevente" ? "active" : ""}`;
+                    item.className = `mobile-nav-item ${feature.id === "analyses" ? "active" : ""}`;
                     item.textContent = feature.title;
                     item.addEventListener("click", () => {
-                        if (feature.id === "aidevente") {
-                            window.location.href = "/aidevente/alertes-notifications.html";
-                        } else {
-                            window.location.href = `/${feature.id}.html`;
-                        }
+                        window.location.href = "/index.html";
                         mobileNavMenu.classList.remove("open");
                     });
                     mobileNavMenu.appendChild(item);
@@ -356,7 +350,7 @@
                     const btn = document.createElement("button");
                     btn.className = "sidebar-item" + (sf.id === "capacites" ? " active" : "");
                     btn.textContent = sf.title;
-                    btn.onclick = () => (window.location.href = `${sf.id}.html`);
+                    btn.onclick = () => (window.location.href = `/analyses/${sf.id}.html`);
                     sidebarNav.appendChild(btn);
                 });
             }

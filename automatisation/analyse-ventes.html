@@ -32,6 +32,23 @@
             </nav>
         </aside>
 
+        <button class="sidebar-toggle" id="sidebarToggle">
+            <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <polyline points="15,18 9,12 15,6"></polyline>
+            </svg>
+        </button>
+
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
         <!-- Main Content -->
         <main class="main-content" id="mainContent">
             <div class="container">
@@ -224,14 +241,13 @@
                     button.className = "nav-button" + (feature.id === "automatisation" ? " active" : "");
                     button.textContent = feature.title;
 
-                    // MODIFIÉ : Redirige vers index.html avec le paramètre feature
                     button.onclick = () => {
-                        window.location.href = `/index.html?feature=${feature.id}`;
+                        window.location.href = "/index.html";
                     };
 
                     navItem.appendChild(button);
 
-                    // Dropdown pour les sous-fonctionnalités de "automatisation"
+                    // Dropdown pour les sous-fonctionnalités d'"automatisation"
                     if (feature.id === "automatisation") {
                         const dropdown = document.createElement("div");
                         dropdown.className = "dropdown-menu";
@@ -246,9 +262,8 @@
                             dropdownItem.className = "dropdown-item";
                             dropdownItem.textContent = sf.title;
 
-                            // MODIFIÉ : Redirige vers index.html avec feature et section
                             dropdownItem.onclick = () => {
-                                window.location.href = `/index.html?feature=${feature.id}&section=${sf.id}`;
+                                window.location.href = `/automatisation/${sf.id}.html`;
                             };
 
                             dropdown.appendChild(dropdownItem);
@@ -283,14 +298,10 @@
                 mobileNavMenu.innerHTML = "";
                 mainFeatures.forEach((feature) => {
                     const item = document.createElement("button");
-                    item.className = `mobile-nav-item ${feature.id === "aidevente" ? "active" : ""}`;
+                    item.className = `mobile-nav-item ${feature.id === "automatisation" ? "active" : ""}`;
                     item.textContent = feature.title;
                     item.addEventListener("click", () => {
-                        if (feature.id === "aidevente") {
-                            window.location.href = "/aidevente/alertes-notifications.html";
-                        } else {
-                            window.location.href = `/${feature.id}.html`;
-                        }
+                        window.location.href = "/index.html";
                         mobileNavMenu.classList.remove("open");
                     });
                     mobileNavMenu.appendChild(item);
@@ -354,7 +365,7 @@
                     const btn = document.createElement("button");
                     btn.className = "sidebar-item" + (sf.id === "analyse-ventes" ? " active" : "");
                     btn.textContent = sf.title;
-                    btn.onclick = () => (window.location.href = `${sf.id}.html`);
+                    btn.onclick = () => (window.location.href = `/automatisation/${sf.id}.html`);
                     sidebarNav.appendChild(btn);
                 });
             }
