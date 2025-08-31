@@ -419,6 +419,11 @@
                     left: 50px;
                 }
             }
+            @media (min-width: 993px) {
+                .burger-menu {
+                    display: none;
+                }
+            }
             @media (max-width: 992px) {
                 .container {
                     max-width: 800px;
@@ -458,6 +463,10 @@
                 }
                 .nav-container {
                     display: none !important;
+                }
+                
+                .burger-menu {
+                    display: block;
                 }
                 
                 .sidebar-toggle {
@@ -553,3 +562,20 @@
                     padding: 0 4px;
                 }
             }
+
+            /* Bouton burger pour mobile */
+.burger-menu {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #374151;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.burger-menu:hover {
+    background-color: #f3f4f6;
+    color: #4f46e5;
+}
