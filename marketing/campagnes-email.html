@@ -250,7 +250,41 @@
                     }
                     navContainer.appendChild(navItem);
                 });
+
+                // Ajout : menu mobile uniquement si mobile
+                if (window.innerWidth <= 992) {
+                    renderMobileNavigation();
+                } else {
+                    mobileNavMenu.innerHTML = "";
+                    mobileNavMenu.classList.remove("open");
+                }
             }
+
+            // Ajout du rendu du menu mobile
+            function renderMobileNavigation() {
+                // Ne rien faire si on est sur desktop
+                if (window.innerWidth > 992) {
+                    mobileNavMenu.innerHTML = "";
+                    mobileNavMenu.classList.remove("open");
+                    return;
+                }
+                mobileNavMenu.innerHTML = "";
+                mainFeatures.forEach((feature) => {
+                    const item = document.createElement("button");
+                    item.className = `mobile-nav-item ${feature.id === "aidevente" ? "active" : ""}`;
+                    item.textContent = feature.title;
+                    item.addEventListener("click", () => {
+                        if (feature.id === "aidevente") {
+                            window.location.href = "/aidevente/alertes-notifications.html";
+                        } else {
+                            window.location.href = `/${feature.id}.html`;
+                        }
+                        mobileNavMenu.classList.remove("open");
+                    });
+                    mobileNavMenu.appendChild(item);
+                });
+            }
+
             // Génération de la sidebar
             function renderSidebar() {
                 const sidebarNav = document.getElementById("sidebarNav");
