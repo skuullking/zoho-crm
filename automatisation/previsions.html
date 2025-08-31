@@ -18,7 +18,7 @@
                     <!-- La navigation principale sera générée par JS -->
                 </nav>
             </div>
-        </header> 
+        </header>
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
@@ -126,6 +126,74 @@
                 {id: "regles-affectation", title: "Règles d'affectation"},
                 {id: "regles-workflow", title: "Règles de workflow"},
             ];
+
+            // État de la sidebar
+            let sidebarOpen = true;
+            const isMobile = () => window.innerWidth <= 992;
+
+            // Toggle sidebar
+            function toggleSidebar() {
+                const sidebar = document.getElementById("sidebar");
+                const mainContent = document.getElementById("mainContent");
+                const overlay = document.getElementById("sidebarOverlay");
+                const toggleBtn = document.getElementById("sidebarToggle");
+
+                if (isMobile()) {
+                    // Mode mobile
+                    sidebarOpen = !sidebarOpen;
+                    sidebar.classList.toggle("sidebar-open", sidebarOpen);
+                    overlay.classList.toggle("active", sidebarOpen);
+                    document.body.style.overflow = sidebarOpen ? "hidden" : "";
+                } else {
+                    // Mode desktop
+                    sidebarOpen = !sidebarOpen;
+                    sidebar.classList.toggle("collapsed", !sidebarOpen);
+                    mainContent.classList.toggle("collapsed", !sidebarOpen);
+                }
+            }
+
+            // Fermer la sidebar sur mobile quand on clique sur l'overlay
+            function closeSidebarOnMobile() {
+                if (isMobile() && sidebarOpen) {
+                    toggleSidebar();
+                }
+            }
+
+            // Initialisation
+            function initSidebar() {
+                const sidebarToggle = document.getElementById("sidebarToggle");
+                const overlay = document.getElementById("sidebarOverlay");
+
+                sidebarToggle.addEventListener("click", toggleSidebar);
+                overlay.addEventListener("click", closeSidebarOnMobile);
+
+                // Gérer le redimensionnement de la fenêtre
+                window.addEventListener("resize", () => {
+                    const sidebar = document.getElementById("sidebar");
+                    const mainContent = document.getElementById("mainContent");
+                    const overlay = document.getElementById("sidebarOverlay");
+
+                    if (isMobile()) {
+                        // Mode mobile - fermer la sidebar et réinitialiser la position du bouton
+                        sidebar.classList.remove("collapsed");
+                        mainContent.classList.remove("collapsed");
+                        sidebar.classList.remove("sidebar-open");
+                        overlay.classList.remove("active");
+                        sidebarOpen = false;
+                        document.body.style.overflow = "";
+                    } else {
+                        // Mode desktop
+                        sidebar.classList.remove("sidebar-open");
+                        overlay.classList.remove("active");
+                        document.body.style.overflow = "";
+
+                        // Restaurer l'état de la sidebar pour desktop
+                        sidebar.classList.toggle("collapsed", !sidebarOpen);
+                        mainContent.classList.toggle("collapsed", !sidebarOpen);
+                    }
+                });
+            }
+
             function renderNav() {
                 const navContainer = document.getElementById("navContainer");
                 navContainer.innerHTML = "";
@@ -255,9 +323,10 @@
                     alert(`Page détaillée pour "${subFeatureId}" non implémentée.`);
                 }
             }
-            // Initialisation
+
             renderNav();
             renderSidebar();
+            initSidebar();
         </script>
     </body>
 </html>

@@ -1,5 +1,4 @@
-
-            * {
+* {
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
@@ -35,6 +34,45 @@
                 height: 100%;
                 padding: 0 16px;
             }
+
+            /* Bouton toggle sidebar */
+            .sidebar-toggle {
+                position: fixed;
+                top: 120px;
+                left: 180px;
+                transform: translateX(0);
+                width: 28px;
+                height: 40px;
+                background: #4f46e5;
+                border: none;
+                border-radius: 0 8px 8px 0;
+                color: white;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 300;
+                transition: all 0.3s ease;
+                box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+            }
+
+            .sidebar-toggle:hover {
+                background: #4338ca;
+                transform: translateX(0) scale(1.05);
+            }
+
+            .sidebar-toggle svg {
+                transition: transform 0.3s ease;
+            }
+
+            .sidebar.collapsed ~ .sidebar-toggle {
+                left: 50px;
+            }
+
+            .sidebar.collapsed ~ .sidebar-toggle svg {
+                transform: rotate(180deg);
+            }
+
             .logo img {
                 height: 32px;
             }
@@ -149,6 +187,29 @@
                 width: 180px;
             }
 
+            /* État rétracté pour desktop */
+            .sidebar.collapsed {
+                width: 50px;
+            }
+
+            .sidebar.collapsed .sidebar-header {
+                padding: 16px 8px;
+            }
+
+            .sidebar.collapsed .sidebar-title,
+            .sidebar.collapsed .sidebar-subtitle {
+                display: none;
+            }
+
+            .sidebar.collapsed .sidebar-item {
+                padding: 12px 8px;
+                text-align: center;
+                font-size: 12px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
             .sidebar-header {
                 background: #4f46e5;
                 color: white;
@@ -196,6 +257,7 @@
                 min-height: 100vh;
                 padding: 0;
             }
+
             .main-content.collapsed {
                 margin-left: 50px;
             }
@@ -281,7 +343,7 @@
                 position: fixed;
                 top: 64px;
                 right: 0;
-                width: 80vw;
+                width: 90vw;
                 max-width: 340px;
                 background: white;
                 box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
@@ -312,6 +374,25 @@
                 color: #4f46e5;
             }
 
+            /* Overlay pour mobile */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
             /* Responsive */
             @media (max-width: 1200px) {
                 .container {
@@ -329,6 +410,14 @@
                 .main-content.collapsed {
                     margin-left: 50px;
                 }
+                
+                .sidebar-toggle {
+                    left: 140px;
+                }
+                
+                .sidebar.collapsed ~ .sidebar-toggle {
+                    left: 50px;
+                }
             }
             @media (max-width: 992px) {
                 .container {
@@ -341,7 +430,7 @@
                     margin-left: 0 !important;
                 }
                 .sidebar {
-                    width: 80vw;
+                    width: 90vw;
                     max-width: 340px;
                     left: -100vw;
                     top: 0;
@@ -353,10 +442,14 @@
                 .sidebar.sidebar-open {
                     left: 0;
                 }
-
-                .sidebar-toggle {
-                    display: block;
+                .sidebar.collapsed {
+                    width: 90vw;
+                    left: -100vw;
                 }
+                .sidebar.collapsed.sidebar-open {
+                    left: 0;
+                }
+
                 .sidebar-header {
                     padding-top: 32px;
                 }
@@ -366,6 +459,32 @@
                 .nav-container {
                     display: none !important;
                 }
+                
+                .sidebar-toggle {
+                    top: 120px;
+                    left: 0;
+                    transform: translateX(0);
+                    width: 28px;
+                    height: 40px;
+                    border-radius: 0 8px 8px 0;
+                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                }
+                
+                .sidebar.sidebar-open ~ .sidebar-toggle {
+                    left: 90vw;
+                }
+                
+                .sidebar.collapsed ~ .sidebar-toggle {
+                    left: 0;
+                }
+                
+                .sidebar.collapsed.sidebar-open ~ .sidebar-toggle {
+                    left: 90vw;
+                }
+                
+                .sidebar.sidebar-open ~ .sidebar-toggle svg {
+                    transform: rotate(180deg);
+                }
             }
             @media (max-width: 768px) {
                 .header-content {
@@ -374,12 +493,6 @@
                 .sidebar {
                     width: 90vw;
                     max-width: 98vw;
-                }
-                .sidebar-toggle {
-                    top: 8px;
-                    padding: 4px;
-                    display: block;
-                    z-index: 300;
                 }
                 .sidebar-header {
                     padding-top: 32px;
@@ -440,4 +553,3 @@
                     padding: 0 4px;
                 }
             }
-        
