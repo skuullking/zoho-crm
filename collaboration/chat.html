@@ -3,9 +3,10 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Processus de Vérification - Yeddir</title>
+        <title>Chat intégré - Yeddir</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:400,500,700&display=swap" />
         <link rel="stylesheet" href="../style.css" />
+        <link rel="icon" type="image/x-icon" href="/image_video/yeddir-logo.svg" />
     </head>
     <body>
         <!-- Header -->
@@ -18,78 +19,60 @@
                     <!-- La navigation principale sera générée par JS -->
                 </nav>
             </div>
-        </header> 
-
+        </header>
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <div class="sidebar-title" id="sidebarTitle">Processus de vente</div>
+                <div class="sidebar-title" id="sidebarTitle">Collaboration</div>
                 <div class="sidebar-subtitle">Navigation</div>
             </div>
-            <nav class="sidebar-nav" id="sidebarNav">
-                <!-- Sidebar items seront générés par JS -->
-            </nav>
+            <nav class="sidebar-nav" id="sidebarNav"></nav>
         </aside>
-
         <!-- Main Content -->
         <main class="main-content" id="mainContent">
             <div class="container">
                 <div class="detailed-hero">
-                    <h1 class="detailed-title">Processus de vérification</h1>
-                    <p class="detailed-subtitle">Contrôles qualité automatiques sur données saisies</p>
+                    <h1 class="detailed-title">Chat intégré</h1>
+                    <p class="detailed-subtitle">Messagerie instantanée intégrée</p>
                 </div>
                 <div class="detailed-content">
                     <div class="detailed-section">
                         <h3>Vue d'ensemble</h3>
                         <p>
-                            Garantissez la qualité de vos données avec des processus de vérification automatiques et des
-                            contrôles de cohérence. Automatisez la détection et la correction des erreurs pour
-                            fiabiliser vos analyses.
+                            Fluidifiez la communication grâce à un chat interne qui permet des échanges rapides, des discussions de groupe et le partage de documents au sein de l’équipe.
                         </p>
                     </div>
                     <div class="detailed-media">
-                        <img
-                            src="/image_video/aide-a-la-vente/alertes-notifications.png"
-                            alt="Processus de vérification"
-                            class="detailed-image"
-                        />
+                        <img src="/image_video/collaboration/chat-interne.svg" alt="Chat interne" class="detailed-image" />
                     </div>
                     <div class="detailed-section">
                         <h3>Fonctionnalités clés</h3>
                         <div class="detailed-features-grid">
                             <div class="detailed-feature-card">
-                                <h4>Validation automatique</h4>
-                                <p>Contrôles en temps réel des données saisies avec règles métier personnalisables.</p>
+                                <h4>Discussions en temps réel</h4>
+                                <p>Échanges immédiats en individuel ou en groupe, notifications instantanées.</p>
                             </div>
                             <div class="detailed-feature-card">
-                                <h4>Sources externes</h4>
-                                <p>Validation croisée avec bases de données officielles et sources tierces fiables.</p>
+                                <h4>Partage de fichiers</h4>
+                                <p>Transfert de documents, images, liens et pièces jointes en un clic.</p>
                             </div>
                             <div class="detailed-feature-card">
-                                <h4>Détection d'incohérences</h4>
-                                <p>Algorithmes intelligents identifiant les anomalies et contradictions.</p>
+                                <h4>Historique des conversations</h4>
+                                <p>Archivage automatique et recherche dans les messages précédents.</p>
                             </div>
                             <div class="detailed-feature-card">
-                                <h4>Workflow de correction</h4>
-                                <p>Processus guidé de correction avec attribution et suivi des modifications.</p>
+                                <h4>Confidentialité assurée</h4>
+                                <p>Gestion des droits d’accès et cryptage des échanges sensibles.</p>
                             </div>
                         </div>
                     </div>
                     <div class="detailed-section">
                         <h3>Bénéfices</h3>
                         <div class="detailed-features-grid">
-                            <div class="detailed-feature-card">
-                                <p>✓ Qualité de données garantie</p>
-                            </div>
-                            <div class="detailed-feature-card">
-                                <p>✓ Réduction des erreurs</p>
-                            </div>
-                            <div class="detailed-feature-card">
-                                <p>✓ Conformité réglementaire</p>
-                            </div>
-                            <div class="detailed-feature-card">
-                                <p>✓ Fiabilité des analyses</p>
-                            </div>
+                            <div class="detailed-feature-card"><p>✓ Communication accélérée</p></div>
+                            <div class="detailed-feature-card"><p>✓ Centralisation des échanges</p></div>
+                            <div class="detailed-feature-card"><p>✓ Sécurité des informations</p></div>
+                            <div class="detailed-feature-card"><p>✓ Collaboration spontanée</p></div>
                         </div>
                     </div>
                 </div>
@@ -113,15 +96,12 @@
                 {id: "plateforme", title: "Outils de développeur"},
             ];
             const subFeatures = [
-                {id: "analyseur-emails", title: "Analyseur d'emails"},
-                {id: "blueprint", title: "Blueprint"},
-                {id: "disposition-multi-pages", title: "Disposition multi-pages"},
-                {id: "notion-leads", title: "Notion de leads"},
-                {id: "processus-approbation", title: "Processus d'approbation"},
-                {id: "processus-verification", title: "Processus de vérification"},
-                {id: "regles-affectation-processus", title: "Règles d'affectation"},
-                {id: "regles-remontee", title: "Règles de remontée"},
-                {id: "regles-validation", title: "Règles de validation"},
+                {id: "flux", title: "flux"},
+                {id: "chat", title: "chat intégré"},
+                {id: "notes", title: "notes"},
+                {id: "balises", title: "balises"},
+                {id: "groupes", title: "groupes"},
+                {id: "gestion-projets", title: "gestion de projets"},
             ];
             function renderNav() {
                 const navContainer = document.getElementById("navContainer");
@@ -223,13 +203,13 @@
                     }, 100);
                 }
             });
-            // Génération de la sidebar
+            // Sidebar active item = "chat"
             function renderSidebar() {
                 const sidebarNav = document.getElementById("sidebarNav");
                 sidebarNav.innerHTML = "";
                 subFeatures.forEach((sf) => {
                     const btn = document.createElement("button");
-                    btn.className = "sidebar-item" + (sf.id === "processus-verification" ? " active" : "");
+                    btn.className = "sidebar-item" + (sf.id === "chat" ? " active" : "");
                     btn.textContent = sf.title;
                     btn.onclick = () => (window.location.href = `${sf.id}.html`);
                     sidebarNav.appendChild(btn);

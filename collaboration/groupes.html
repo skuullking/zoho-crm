@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Processus de Vérification - Yeddir</title>
+        <title>Groupes de Travail - Yeddir</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:400,500,700&display=swap" />
         <link rel="stylesheet" href="../style.css" />
     </head>
@@ -19,38 +19,31 @@
                 </nav>
             </div>
         </header> 
-
-        <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <div class="sidebar-title" id="sidebarTitle">Processus de vente</div>
+                <div class="sidebar-title" id="sidebarTitle">Collaboration</div>
                 <div class="sidebar-subtitle">Navigation</div>
             </div>
-            <nav class="sidebar-nav" id="sidebarNav">
-                <!-- Sidebar items seront générés par JS -->
-            </nav>
+            <nav class="sidebar-nav" id="sidebarNav"></nav>
         </aside>
-
-        <!-- Main Content -->
         <main class="main-content" id="mainContent">
             <div class="container">
                 <div class="detailed-hero">
-                    <h1 class="detailed-title">Processus de vérification</h1>
-                    <p class="detailed-subtitle">Contrôles qualité automatiques sur données saisies</p>
+                    <h1 class="detailed-title">Groupes de travail</h1>
+                    <p class="detailed-subtitle">Organisation par équipes et projets</p>
                 </div>
                 <div class="detailed-content">
                     <div class="detailed-section">
                         <h3>Vue d'ensemble</h3>
                         <p>
-                            Garantissez la qualité de vos données avec des processus de vérification automatiques et des
-                            contrôles de cohérence. Automatisez la détection et la correction des erreurs pour
-                            fiabiliser vos analyses.
+                            Structurez votre organisation par groupes de travail pour gérer efficacement les projets,
+                            les dossiers et la communication transversale.
                         </p>
                     </div>
                     <div class="detailed-media">
                         <img
-                            src="/image_video/aide-a-la-vente/alertes-notifications.png"
-                            alt="Processus de vérification"
+                            src="/image_video/collaboration/groupes-travail.svg"
+                            alt="Groupes de travail"
                             class="detailed-image"
                         />
                     </div>
@@ -58,38 +51,30 @@
                         <h3>Fonctionnalités clés</h3>
                         <div class="detailed-features-grid">
                             <div class="detailed-feature-card">
-                                <h4>Validation automatique</h4>
-                                <p>Contrôles en temps réel des données saisies avec règles métier personnalisables.</p>
+                                <h4>Création de groupes</h4>
+                                <p>Constitution d'équipes par projet, client ou thématique métier.</p>
                             </div>
                             <div class="detailed-feature-card">
-                                <h4>Sources externes</h4>
-                                <p>Validation croisée avec bases de données officielles et sources tierces fiables.</p>
+                                <h4>Partage ciblé</h4>
+                                <p>Accès restreint ou partagé selon la confidentialité des sujets.</p>
                             </div>
                             <div class="detailed-feature-card">
-                                <h4>Détection d'incohérences</h4>
-                                <p>Algorithmes intelligents identifiant les anomalies et contradictions.</p>
+                                <h4>Communication interne</h4>
+                                <p>Canaux de discussion, partage de documents et calendrier dédié.</p>
                             </div>
                             <div class="detailed-feature-card">
-                                <h4>Workflow de correction</h4>
-                                <p>Processus guidé de correction avec attribution et suivi des modifications.</p>
+                                <h4>Gestion des tâches de groupe</h4>
+                                <p>Suivi des actions et des responsabilités au sein de chaque groupe.</p>
                             </div>
                         </div>
                     </div>
                     <div class="detailed-section">
                         <h3>Bénéfices</h3>
                         <div class="detailed-features-grid">
-                            <div class="detailed-feature-card">
-                                <p>✓ Qualité de données garantie</p>
-                            </div>
-                            <div class="detailed-feature-card">
-                                <p>✓ Réduction des erreurs</p>
-                            </div>
-                            <div class="detailed-feature-card">
-                                <p>✓ Conformité réglementaire</p>
-                            </div>
-                            <div class="detailed-feature-card">
-                                <p>✓ Fiabilité des analyses</p>
-                            </div>
+                            <div class="detailed-feature-card"><p>✓ Collaboration ciblée</p></div>
+                            <div class="detailed-feature-card"><p>✓ Meilleure organisation</p></div>
+                            <div class="detailed-feature-card"><p>✓ Répartition claire des rôles</p></div>
+                            <div class="detailed-feature-card"><p>✓ Suivi de projet simplifié</p></div>
                         </div>
                     </div>
                 </div>
@@ -113,15 +98,12 @@
                 {id: "plateforme", title: "Outils de développeur"},
             ];
             const subFeatures = [
-                {id: "analyseur-emails", title: "Analyseur d'emails"},
-                {id: "blueprint", title: "Blueprint"},
-                {id: "disposition-multi-pages", title: "Disposition multi-pages"},
-                {id: "notion-leads", title: "Notion de leads"},
-                {id: "processus-approbation", title: "Processus d'approbation"},
-                {id: "processus-verification", title: "Processus de vérification"},
-                {id: "regles-affectation-processus", title: "Règles d'affectation"},
-                {id: "regles-remontee", title: "Règles de remontée"},
-                {id: "regles-validation", title: "Règles de validation"},
+                {id: "flux", title: "flux"},
+                {id: "chat", title: "chat intégré"},
+                {id: "notes", title: "notes"},
+                {id: "balises", title: "balises"},
+                {id: "groupes", title: "groupes"},
+                {id: "gestion-projets", title: "gestion de projets"},
             ];
             function renderNav() {
                 const navContainer = document.getElementById("navContainer");
@@ -229,7 +211,7 @@
                 sidebarNav.innerHTML = "";
                 subFeatures.forEach((sf) => {
                     const btn = document.createElement("button");
-                    btn.className = "sidebar-item" + (sf.id === "processus-verification" ? " active" : "");
+                    btn.className = "sidebar-item" + (sf.id === "groupes-travail" ? " active" : "");
                     btn.textContent = sf.title;
                     btn.onclick = () => (window.location.href = `${sf.id}.html`);
                     sidebarNav.appendChild(btn);
