@@ -383,6 +383,11 @@
             renderNav();
             renderSidebar();
             initSidebar();
+
+            // Ajout : re-render navigation au resize pour éviter le bug lors du redimensionnement
+            window.addEventListener("resize", () => {
+                renderNav();
+            });
         </script>
     </body>
 </html>
