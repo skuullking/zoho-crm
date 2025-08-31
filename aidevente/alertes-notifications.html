@@ -131,8 +131,6 @@
                 {id: "zoho-meeting", title: "Intégration de Zoho Meeting"},
                 {id: "google-office", title: "Google Workspace et Office 365"},
                 {id: "alertes-notifications", title: "Alertes et notifications"},
-                {id: "gestion-transactions", title: "Gestion des transactions"},
-                {id: "gestion-comptes", title: "Gestion des comptes"},
                 {id: "mobile-aide", title: "Mobile"},
             ];
 
@@ -228,11 +226,7 @@
                     button.className = "nav-button" + (feature.id === "aidevente" ? " active" : "");
                     button.textContent = feature.title;
                     button.onclick = () => {
-                        if (feature.id === "aidevente") {
-                            window.location.href = "/aidevente/alertes-notifications.html";
-                        } else {
-                            window.location.href = `/${feature.id}.html`;
-                        }
+                        window.location.href = "/index.html";
                     };
                     navItem.appendChild(button);
                     if (feature.id === "aidevente") {
@@ -279,11 +273,7 @@
                     item.className = `mobile-nav-item ${feature.id === "aidevente" ? "active" : ""}`;
                     item.textContent = feature.title;
                     item.addEventListener("click", () => {
-                        if (feature.id === "aidevente") {
-                            window.location.href = "/aidevente/alertes-notifications.html";
-                        } else {
-                            window.location.href = `/${feature.id}.html`;
-                        }
+                        window.location.href = "/index.html";
                         mobileNavMenu.classList.remove("open");
                     });
                     mobileNavMenu.appendChild(item);
@@ -302,11 +292,7 @@
                 });
             }
             function goToOverview(featureId) {
-                if (featureId === "aidevente") {
-                    window.location.href = "/aidevente/alertes-notifications.html";
-                } else {
-                    window.location.href = `/${featureId}.html`;
-                }
+                window.location.href = "/index.html";
             }
             function goToSubFeature(subFeatureId) {
                 window.location.href = `/aidevente/${subFeatureId}.html`;
@@ -323,4 +309,3 @@
         </script>
     </body>
 </html>
-

@@ -224,7 +224,9 @@
                     button.className = "nav-button" + (feature.id === currentMainFeatureId ? " active" : "");
                     button.textContent = feature.title;
                     // Redirection vers l'overview de la fonctionnalité
-                    button.onclick = () => goToOverview(feature.id);
+                    button.onclick = () => {
+                        window.location.href = "/index.html";
+                    };
                     navItem.appendChild(button);
 
                     // Dropdown pour les sous-fonctionnalités de "automatisation"
@@ -273,11 +275,7 @@
                     item.className = `mobile-nav-item ${feature.id === "aidevente" ? "active" : ""}`;
                     item.textContent = feature.title;
                     item.addEventListener("click", () => {
-                        if (feature.id === "aidevente") {
-                            window.location.href = "/aidevente/alertes-notifications.html";
-                        } else {
-                            window.location.href = `/${feature.id}.html`;
-                        }
+                        window.location.href = "/index.html";
                         mobileNavMenu.classList.remove("open");
                     });
                     mobileNavMenu.appendChild(item);
@@ -289,14 +287,7 @@
 
             // Fonction de navigation à adapter selon l'intégration SPA/routing
             function goToOverview(featureId) {
-                currentMainFeatureId = featureId;
-                renderNav();
-                if (featureId === "automatisation") {
-                    window.location.href = "index.html";
-                } else {
-                    // Redirige vers la page correspondante (à adapter selon le projet)
-                    alert(`Redirection vers la fonctionnalité "${featureId}"`);
-                }
+                window.location.href = "/index.html";
             }
             // Génération de la sidebar
             function renderSidebar() {
@@ -312,12 +303,7 @@
             }
             // Navigation (adaptable selon votre intégration SPA/routing)
             function goToOverview(featureId) {
-                if (featureId === "automatisation") {
-                    window.location.href = "index.html"; // ou la page d'accueil principale
-                } else {
-                    // Redirige vers la page correspondante
-                    alert(`Redirection vers la fonctionnalité "${featureId}"`);
-                }
+                window.location.href = "/index.html";
             }
             function goToSubFeature(subFeatureId) {
                 if (subFeatureId === "gestion-leads") {
@@ -325,6 +311,20 @@
                 } else {
                     // Redirige vers la page détaillée correspondante ou affiche une alerte
                     alert(`Page détaillée pour "${subFeatureId}" non implémentée.`);
+                }
+            }
+
+            renderNav();
+            renderSidebar();
+            initSidebar();
+
+            // Ajout : re-render navigation au resize pour éviter le bug lors du redimensionnement
+            window.addEventListener("resize", () => {
+                renderNav();
+            });
+        </script>
+    </body>
+</html>
                 }
             }
 
