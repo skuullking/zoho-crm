@@ -16,7 +16,7 @@
                 </div>
                 <nav class="nav-container" id="navContainer"></nav>
             </div>
-        </header> 
+        </header>
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="sidebar-title" id="sidebarTitle">Automatisation du marketing</div>
@@ -24,6 +24,24 @@
             </div>
             <nav class="sidebar-nav" id="sidebarNav"></nav>
         </aside>
+
+        <button class="sidebar-toggle" id="sidebarToggle">
+            <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <polyline points="15,18 9,12 15,6"></polyline>
+            </svg>
+        </button>
+
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
         <main class="main-content" id="mainContent">
             <div class="container">
                 <div class="detailed-hero">
@@ -108,7 +126,74 @@
                 {id: "sous-campagnes", title: "Sous-campagnes"},
                 {id: "analyse-marketing", title: "Analyse marketing"},
             ];
-            // Génération de la nav principale
+
+            // État de la sidebar
+            let sidebarOpen = true;
+            const isMobile = () => window.innerWidth <= 992;
+
+            // Toggle sidebar
+            function toggleSidebar() {
+                const sidebar = document.getElementById("sidebar");
+                const mainContent = document.getElementById("mainContent");
+                const overlay = document.getElementById("sidebarOverlay");
+                const toggleBtn = document.getElementById("sidebarToggle");
+
+                if (isMobile()) {
+                    // Mode mobile
+                    sidebarOpen = !sidebarOpen;
+                    sidebar.classList.toggle("sidebar-open", sidebarOpen);
+                    overlay.classList.toggle("active", sidebarOpen);
+                    document.body.style.overflow = sidebarOpen ? "hidden" : "";
+                } else {
+                    // Mode desktop
+                    sidebarOpen = !sidebarOpen;
+                    sidebar.classList.toggle("collapsed", !sidebarOpen);
+                    mainContent.classList.toggle("collapsed", !sidebarOpen);
+                }
+            }
+
+            // Fermer la sidebar sur mobile quand on clique sur l'overlay
+            function closeSidebarOnMobile() {
+                if (isMobile() && sidebarOpen) {
+                    toggleSidebar();
+                }
+            }
+
+            // Initialisation
+            function initSidebar() {
+                const sidebarToggle = document.getElementById("sidebarToggle");
+                const overlay = document.getElementById("sidebarOverlay");
+
+                sidebarToggle.addEventListener("click", toggleSidebar);
+                overlay.addEventListener("click", closeSidebarOnMobile);
+
+                // Gérer le redimensionnement de la fenêtre
+                window.addEventListener("resize", () => {
+                    const sidebar = document.getElementById("sidebar");
+                    const mainContent = document.getElementById("mainContent");
+                    const overlay = document.getElementById("sidebarOverlay");
+
+                    if (isMobile()) {
+                        // Mode mobile - fermer la sidebar et réinitialiser la position du bouton
+                        sidebar.classList.remove("collapsed");
+                        mainContent.classList.remove("collapsed");
+                        sidebar.classList.remove("sidebar-open");
+                        overlay.classList.remove("active");
+                        sidebarOpen = false;
+                        document.body.style.overflow = "";
+                    } else {
+                        // Mode desktop
+                        sidebar.classList.remove("sidebar-open");
+                        overlay.classList.remove("active");
+                        document.body.style.overflow = "";
+
+                        // Restaurer l'état de la sidebar pour desktop
+                        sidebar.classList.toggle("collapsed", !sidebarOpen);
+                        mainContent.classList.toggle("collapsed", !sidebarOpen);
+                    }
+                });
+            }
+
             function renderNav() {
                 const navContainer = document.getElementById("navContainer");
                 navContainer.innerHTML = "";
@@ -165,6 +250,7 @@
             }
             renderNav();
             renderSidebar();
+            initSidebar();
         </script>
     </body>
 </html>

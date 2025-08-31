@@ -20,7 +20,6 @@
                 </nav>
             </div>
         </header>
- 
 
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
@@ -141,7 +140,6 @@
                 {id: "regles-affectation", title: "Règles d'affectation"},
                 {id: "regles-workflow", title: "Règles de workflow"},
             ];
-            // Génération de la nav principale
 
             function renderNav() {
                 const navContainer = document.getElementById("navContainer");
@@ -264,12 +262,10 @@
                     alert(`Redirection vers la fonctionnalité "${featureId}"`);
                 }
             }
-            // Initialisation
+
             renderNav();
             renderSidebar();
-            // Initialisation
-            renderNav();
-            renderSidebar();
+            initSidebar();
         </script>
     </body>
 </html>
