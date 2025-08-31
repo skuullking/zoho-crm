@@ -134,6 +134,21 @@
             let sidebarOpen = true;
             const isMobile = () => window.innerWidth <= 992;
 
+            // Ajout du menu mobile
+            const burgerMenu = document.getElementById("burgerMenu");
+            const mobileNavMenu = document.getElementById("mobileNavMenu");
+
+            burgerMenu.addEventListener("click", () => {
+                mobileNavMenu.classList.toggle("open");
+            });
+
+            // Fermer le menu mobile si clic en dehors
+            document.addEventListener("click", (e) => {
+                if (!mobileNavMenu.contains(e.target) && !burgerMenu.contains(e.target)) {
+                    mobileNavMenu.classList.remove("open");
+                }
+            });
+
             // Toggle sidebar
             function toggleSidebar() {
                 const sidebar = document.getElementById("sidebar");
